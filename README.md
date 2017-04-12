@@ -6,4 +6,6 @@ _How will this work? Here's an idea:_
 - on the pi, every time the camera sees motion, we wait about a second and then upload a pic to the web app, which uploads the pic to google and returns the recipes
 - JS in the web page communicates with a local web server on the pi to flip on lights and stuff
 
+[https://spicexbrown.appspot.com](https://spicexbrown.appspot.com)
+
 [Doc for notes](https://docs.google.com/a/brown.edu/document/d/1trEixanEznd0PjVrBvfIbYg7RRwER54C_jklffTsIRM/edit?usp=sharing)
