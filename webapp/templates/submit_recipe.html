@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+
+<form id='submit_recipe' method='POST'>
+  <h1>Submit a Recipe</h1>
+  
+  {% if error %}
+  <section>
+    <p class='error'>{{ error }}</p>
+  </section>
+  {% endif %}
+  
+  {% if message %}
+  <section>
+    <p class='message'>{{ message }}</p>
+  </section>
+  {% endif %}
+  
+  <section>
+    <h2>Which foods is this recipe for?</h2>
+    <p>Type as many as apply, separated by commas</p>
+    <input name='foods' type='text' placeholder='chicken, vegetables' />
+  </section>
+  <section>
+    <h2>Recipe info</h2>
+    <div>
+      <label>Recipe title</label>
+      <input name='title' placeholder='Chili Chicken' type='text'/>
+    </div>
+    <div>
+      <label>Recipe description</label>
+      <input name='description' placeholder='' type='text'/>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Ingredients</h2>
+    <ul>
+      {% for ingredient in ingredients %}
+        <li>
+          <div>
+            <input type='checkbox' name='{{ ingredient.id }}_ingredient'/>
+            <span class='name'>{{ ingredient.name }}</span>
+          </div>
+          <div>
+            <label>Amount:</label>
+            <input name='{{ ingredient.id }}_ingredient_amount' placeholder='Two shakes' type='text'/>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+    <div>
+      <label>Any extra preparation instructions? (optional)</label>
+      <input name='extra_prep' type='text'/>
+    </div>
+  </section>
+  
+  <section>
+    <input type='submit'/>
+  </section>
+</form>
+
+{% endblock %}
