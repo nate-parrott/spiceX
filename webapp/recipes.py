@@ -6,6 +6,11 @@ from models import Recipe
 
 ingredients = json.load(open('ingredients.json'))
 
+flavor_attributes = [
+    {'name': 'spicyness', 'label': 'How spicy will this be?'},
+    {'name': 'sweetness', 'label': 'How sweet will this be?'}
+]
+
 class SubmitRecipe(webapp2.RequestHandler):
     def get(self):
         if users.get_current_user():
@@ -17,7 +22,8 @@ class SubmitRecipe(webapp2.RequestHandler):
         vals = {
             "ingredients": ingredients,
             "error": error,
-            "message": message
+            "message": message,
+            "flavor_attribs": flavor_attributes
         }
         self.response.write(template('submit_recipe.html', vals))
     
@@ -41,13 +47,18 @@ class SubmitRecipe(webapp2.RequestHandler):
                     ingredients_json.append({'ingredient': id, 'amount': amount})
             if len(ingredients_json) == 0:
                 return self.render_form(error='Check at least one ingredient!')
+            kwargs = {}
+            for flavor in flavor_attributes:
+                name = flavor['name']
+                kwargs[name] = float(self.request.get(name))
             
             recipe = Recipe(foods=foods, 
                             title=title, 
                             description=desc, 
                             ingredients=ingredients_json, 
                             extra_instructions=extra_prep,
-                            creator=users.get_current_user())
+                            creator=users.get_current_user(),
+                            **kwargs)
             recipe.put()
             
             return self.render_form(message='Thanks for your submission!')

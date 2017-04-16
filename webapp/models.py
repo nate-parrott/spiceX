@@ -13,4 +13,7 @@ class Recipe(ndb.Model):
     ingredients = ndb.JsonProperty() # [{"ingredient": <id>, "amount": <>}]
     extra_instructions = ndb.TextProperty()
     
+    spicyness = ndb.FloatProperty()
+    sweetness = ndb.FloatProperty()
+    
     enabled = ndb.BooleanProperty(default=False)
