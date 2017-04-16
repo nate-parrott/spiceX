@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section id='recipe_review'>
+  <h1>Recipes</h1>
+  <ul>
+    {% for recipe in recipes %}
+      <li>
+        <h2>{{ recipe.title }}</h2>
+        <p>Submitted by {{ recipe.creator }}</p>
+        <ul>
+          {% for food in recipe.foods %}
+          <li>{{ food }}</li>
+          {% endfor %}
+        </ul>
+        <p>"{{ recipe.description }}"</p>
+        <p><code>{{ recipe.ingredients }}</code></p>
+        <p><em>{{ recipe.extra_prep }}</em></p>
+        <button class='enabled-toggle' data-recipe-id='{{ recipe.key.urlsafe() }}' {% if recipe.enabled %}data-recipe-enabled='true'{% endif %}>{% if recipe.enabled %}Disable{% else %}Enable{% endif %}</button>
+    {% endfor %}
+  </ul>
+</section>
+
+<script>
+  $('.enabled-toggle').click(function(e) {
+    let alreadyEnabled = !!$(e.target).attr('data-recipe-enabled');
+    let newState = !alreadyEnabled;
+    $(e.target).text(newState ? 'Disable' : 'Enable').attr('data-recipe-enabled', newState ? 'true' : '');
+    let id = $(e.target).attr('data-recipe-id');
+    $.post('/enable_recipe', {id: id, enabled: newState});
+  });
+</script>
+
+{% endblock %}

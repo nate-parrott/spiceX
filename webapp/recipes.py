@@ -62,5 +62,4 @@ class SubmitRecipe(webapp2.RequestHandler):
             recipe.put()
             
             return self.render_form(message='Thanks for your submission!')
-            
 
