@@ -16,6 +16,7 @@ import webapp2
 from recognition import Recognize
 from recipes import SubmitRecipe
 from recipe_review import RecipeReview, EnableRecipe
+from recommendations import Recommendations
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
@@ -27,5 +28,6 @@ app = webapp2.WSGIApplication([
     ('/recognize', Recognize),
     ('/submit', SubmitRecipe),
     ('/review', RecipeReview),
+    ('/recommend', Recommendations),
     ('/enable_recipe', EnableRecipe)
 ], debug=True)

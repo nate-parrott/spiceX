@@ -17,3 +17,13 @@ class Recipe(ndb.Model):
     sweetness = ndb.FloatProperty()
     
     enabled = ndb.BooleanProperty(default=False)
+    
+    def json(self):
+        return {
+            "title": self.title,
+            "description": self.description,
+            "ingredients": self.ingredients,
+            "extra_instructions": self.extra_instructions,
+            "spicyness": self.spicyness,
+            "sweetness": self.sweetness
+        }
