@@ -1,22 +1,13 @@
 let cvs = document.createElement('canvas');
 let ctx = cvs.getContext('2d');
+let imageDiffThreshold = 0.05;
 
-// function loadImage()
-// {
-//     var image = new Image();
-//     image.src = 'image.jpg';
-//     image.addEventListener('load',function()
-//         {
-//             MainCtx.drawImage(image,MainCanvas.width/2,MainCanvas.height/2);
-//             console.log("width here" +image.width+ " maincanvas " +MainCanvas+ " mainctx " +MainCtx+ " image " +image);
-//             ImageObject.pixels = getImagePixels(image); //-> store pixel data in the image
-//         });
-//     return image;
-// }
+let lastDiff = null;
 
 function getImageData(url, callback) {
   let image = new Image();
   image.crossOrigin = "Anonymous";
+  // $('#img-container').empty().append(image);
   image.addEventListener('load', function() {
     cvs.width = image.width;
     cvs.height = image.height;
@@ -37,11 +28,27 @@ function imagesAreDifferent(im1, im2) {
       diff += Math.abs(im1.data[i] - im2.data[i]);
     }
     let averageDiff = (diff / 255) / len;
-    return averageDiff > 0.2;
+    lastDiff = averageDiff;
+    return averageDiff > imageDiffThreshold;
   } else {
     return true;
   }
 }
+
+function postImageData(data, callback) {
+  ctx.putImageData(data, 0, 0);
+  let url = cvs.toDataURL('image/jpeg');
+  $.post('/recognize_b64', {data: url}, function(resp) {
+    callback(JSON.parse(resp));
+  })
+}
+
+// getImageData('http://localhost:8999/', (data) => {
+//   console.log('got')
+//   postImageData(data, (resp) => {
+//     console.log(resp)
+//   })
+// })
 
 let cameraLoopInterval = 300;
 
@@ -51,6 +58,7 @@ class FoodRecognizer {
     this.prevImage = null;
     this.mostRecentImage = null;
     this.fetchCount = 0;
+    this.lastRec = null;
     this.cameraLoop();
   }
   cameraLoop() {
@@ -84,10 +92,14 @@ class FoodRecognizer {
     this.timeLeftBeforeSendingImage = null;
     this.fetchCount++;
     // use this.mostRecentImage
-    callback();
+    postImageData(this.mostRecentImage, (results) => {
+      this.lastRec = results;
+      console.log(results)
+      callback();
+    })
   }
   updateStatus() {
-    $('#status').text(this.fetchCount + ' fetches');
+    $('#status').text(this.fetchCount + ' fetches\nlast diff: ' + lastDiff + '\nlast rec: ' + JSON.stringify(this.lastRec));
   }
 }
 

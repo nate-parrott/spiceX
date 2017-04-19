@@ -1,5 +1,11 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 import sys, os
+from StringIO import StringIO
+
+try:
+    import picamera
+except:
+    pass
 
 usage = """Usage:
 python camera_server.py camera
@@ -24,10 +30,15 @@ class ImageFromFile(object):
 
 class ImageFromCamera(object):
     def __init__(self):
-        pass
+        self.camera = picamera.PiCamera()
+        # original res: 3280 x 2464
+        self.camera.resolution = (820, 616)
     
     def get_image(self):
-        pass
+        io = StringIO()
+        self.camera.capture(io, format='jpeg')
+        val = io.getvalue()
+        return val
 
 if len(sys.argv) < 2:
     print usage

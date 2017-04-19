@@ -1,6 +1,6 @@
 import webapp2
 from requests import post
-from base64 import b64encode
+from base64 import b64encode, b64decode
 import json
 
 secrets = json.load(open('secrets.json'))
@@ -64,5 +64,11 @@ def recognize_google(data):
 class Recognize(webapp2.RequestHandler):
     def post(self):
         data = self.request.body
+        response = recognize_google(data)
+        self.response.write(json.dumps(response))
+
+class RecognizeBase64(webapp2.RequestHandler):
+    def post(self):
+        data = b64decode(self.request.get('data').split('base64,', 1)[1])
         response = recognize_google(data)
         self.response.write(json.dumps(response))

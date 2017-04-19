@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import webapp2
-from recognition import Recognize
+from recognition import Recognize, RecognizeBase64
 from recipes import SubmitRecipe
 from recipe_review import RecipeReview, EnableRecipe
 from recommendations import Recommendations
@@ -31,6 +31,7 @@ class SpiceXHandler(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/recognize', Recognize),
+    ('/recognize_b64', RecognizeBase64),
     ('/submit', SubmitRecipe),
     ('/review', RecipeReview),
     ('/recommend', Recommendations),
