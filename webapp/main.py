@@ -17,11 +17,16 @@ from recognition import Recognize
 from recipes import SubmitRecipe
 from recipe_review import RecipeReview, EnableRecipe
 from recommendations import Recommendations
+from template import template
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/plain'
         self.response.write('Hello, World!')
+
+class SpiceXHandler(webapp2.RequestHandler):
+    def get(self):
+        self.response.write(template('spicex.html'))
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
@@ -29,5 +34,6 @@ app = webapp2.WSGIApplication([
     ('/submit', SubmitRecipe),
     ('/review', RecipeReview),
     ('/recommend', Recommendations),
-    ('/enable_recipe', EnableRecipe)
+    ('/enable_recipe', EnableRecipe),
+    ('/spicex', SpiceXHandler)
 ], debug=True)

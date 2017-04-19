@@ -42,11 +42,24 @@ else:
 PORT = 8999
 
 class Handler(BaseHTTPRequestHandler):
+    def do_OPTIONS(self):
+        self.send_response(200)
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'GET, OPTIONS')
+        self.end_headers()
+    
     def do_GET(self):
         self.send_response(200)
-        self.send_header('Content-Type', 'image/jpeg')
-        self.send_header('Access-Control-Allow-Origin', '*')
-        self.send_header('Access-Control-Allow-Methods', 'GET')
+        headers = {
+            "Cache-Control": "no-cache, no-store, must-revalidate",
+            "Pragma": "no-cache",
+            "Expires": "0",
+            "Content-Type": "image/jpeg",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, OPTIONS"
+        }
+        for h, v in headers.iteritems():
+            self.send_header(h, v)
         self.end_headers()
         self.wfile.write(imager.get_image())
 
