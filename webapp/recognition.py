@@ -23,12 +23,14 @@ def recognize_clarifai(data):
     }
     url = 'https://api.clarifai.com/v2/models/bd367be194cf45149e75f01d59f77ba7/outputs'
     api_resp = json.loads(post(url, data=json.dumps(req), headers=headers).text)
+    print api_resp
     
     concepts = api_resp['outputs'][0]['data']['concepts']
     foods = [(c['name'], c['value']) for c in concepts]
     response = {
         "foods": foods
     }
+    return response
 
 def recognize_google(data):
     key = secrets['google_key']
@@ -70,5 +72,5 @@ class Recognize(webapp2.RequestHandler):
 class RecognizeBase64(webapp2.RequestHandler):
     def post(self):
         data = b64decode(self.request.get('data').split('base64,', 1)[1])
-        response = recognize_google(data)
+        response = recognize_clarifai(data)
         self.response.write(json.dumps(response))

@@ -43,12 +43,13 @@ function postImageData(data, callback) {
   })
 }
 
-// getImageData('http://localhost:8999/', (data) => {
-//   console.log('got')
-//   postImageData(data, (resp) => {
-//     console.log(resp)
-//   })
-// })
+// TEST RECOGNITION:
+getImageData('http://localhost:8999/', (data) => {
+  console.log('got')
+  postImageData(data, (resp) => {
+    console.log(resp)
+  })
+})
 
 let cameraLoopInterval = 300;
 
