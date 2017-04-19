@@ -1,6 +1,6 @@
 let cvs = document.createElement('canvas');
 let ctx = cvs.getContext('2d');
-let imageDiffThreshold = 0.05;
+let imageDiffThreshold = 0.01;
 
 let lastDiff = null;
 
