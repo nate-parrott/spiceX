@@ -38,18 +38,24 @@ function imagesAreDifferent(im1, im2) {
 function postImageData(data, callback) {
   ctx.putImageData(data, 0, 0);
   let url = cvs.toDataURL('image/jpeg');
-  $.post('/recognize_b64', {data: url}, function(resp) {
+  $.post('/recognize_and_recommend', {data: url}, function(resp) {
     callback(JSON.parse(resp));
   })
 }
 
 // TEST RECOGNITION:
-getImageData('http://localhost:8999/', (data) => {
-  console.log('got')
-  postImageData(data, (resp) => {
-    console.log(resp)
+// getImageData('http://localhost:8999/', (data) => {
+//   postImageData(data, (resp) => {
+//     window.gotFood(resp);
+//     // console.log(resp)
+//   })
+// })
+
+if (window.DEBUG_FOODS) {
+  $.post('/recognize_and_recommend', {debug_foods: window.DEBUG_FOODS.join('//')}, function(resp) {
+    window.gotFood(JSON.parse(resp));
   })
-})
+}
 
 let cameraLoopInterval = 300;
 
@@ -95,6 +101,7 @@ class FoodRecognizer {
     // use this.mostRecentImage
     postImageData(this.mostRecentImage, (results) => {
       this.lastRec = results;
+      window.gotFood(results);
       console.log(results)
       callback();
     })
@@ -105,5 +112,7 @@ class FoodRecognizer {
 }
 
 $(function() {
-  window.rec = new FoodRecognizer();
+  if (!window.DEBUG_FOODS) {
+    window.rec = new FoodRecognizer();
+  }
 });

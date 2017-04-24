@@ -2,10 +2,27 @@
 <html>
 <head>
   <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
-  <script src='/static/spicex4.js'></script>
+  
+  <!-- setting DEBUG_FOODS bypasses the camera -->
+  <script>
+    DEBUG_FOODS = ['waffle', 'meal', 'food', 'chicken']
+  </script>
+  <script src='/static/ui.js'></script>
+  
+  <!-- this script calls gotFood() in ui, with a list of recommendations-->
+  <script src='/static/recognition.js'></script>
+  
+  <link rel='stylesheet' href='/static/fonts.css'/>
+  <link rel='stylesheet' href='/static/ui.css'/>
+  
 </head>
 <body>
-  <pre id='status'></pre>
-  <div id='img-container'></div>
+  <div id='debug' style='display: none'>
+    <pre id='status'></pre>
+    <div id='img-container'></div>
+  </div>
+  <div id='main'>
+    
+  </div>
 </body>
 </html>

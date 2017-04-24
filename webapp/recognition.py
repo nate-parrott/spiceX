@@ -2,6 +2,7 @@ import webapp2
 from requests import post
 from base64 import b64encode, b64decode
 import json
+from recommendations import get_recommendations
 
 secrets = json.load(open('secrets.json'))
 
@@ -43,7 +44,8 @@ def recognize_google(data):
           },
           "features": [
             {
-              "type": "LABEL_DETECTION"
+              "type": "LABEL_DETECTION",
+              "maxResults": 20
             }
           ]
         }
@@ -53,7 +55,7 @@ def recognize_google(data):
         "Content-Type": "application/json"
     }
     resp = json.loads(post(url, data=json.dumps(req), headers=headers).text)
-    if 'response' not in resp:
+    if 'responses' not in resp:
         print 'ERROR:'
         print resp
     labels = resp['responses'][0]['labelAnnotations']
@@ -72,5 +74,19 @@ class Recognize(webapp2.RequestHandler):
 class RecognizeBase64(webapp2.RequestHandler):
     def post(self):
         data = b64decode(self.request.get('data').split('base64,', 1)[1])
-        response = recognize_clarifai(data)
+        response = recognize_google(data)
+        self.response.write(json.dumps(response))
+
+class RecognizeAndRecommend(webapp2.RequestHandler):
+    def post(self):
+        if self.request.get('debug_foods'):
+            foods = self.request.get('debug_foods').split('//')
+            food_scores = None
+        else:
+            data = b64decode(self.request.get('data').split('base64,', 1)[1])
+            food_scores = recognize_google(data)['foods']
+            foods = [f[0] for f in food_scores]
+        print 'FOODS:', foods
+        recommendations = get_recommendations(foods)
+        response = {"recommendations": recommendations, "food_scores": food_scores}
         self.response.write(json.dumps(response))

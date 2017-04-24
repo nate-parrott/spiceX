@@ -1,0 +1,98 @@
+body {
+  background-color: #333;
+}
+
+html, body, #main {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+
+@media screen and (min-width: 1000px) {
+  #main {
+    width: 800px;
+    height: 480px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -400px;
+    margin-top: -240px;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.5);
+  }
+}
+
+#main {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  font-family: 'Apercu';
+  font-size: 20px;
+}
+
+#main .header {
+  background-color: #eee;
+  white-space: nowrap;
+/*  overflow-x: auto; */
+  padding-left: 8px;
+  height: 60px;
+}
+
+#main .header > div {
+  opacity: 0.5;
+  display: inline-block;
+  padding: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+#main .header > div.selected {
+  opacity: 1;
+}
+
+#main .recipes {
+  flex-grow: 1;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  white-space: nowrap;
+  position: relative;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+#main .recipes .recipe {
+  display: inline-block;
+  width: 700px;
+  vertical-align: top;
+}
+
+#main .recipes .recipe .card  {
+  white-space: normal;
+  margin: 25px;
+  padding: 25px;
+  background-color: #eee;
+  text-align: center;
+}
+
+h1 {
+  font-size: 1.5em;
+}
+
+.ingredients {
+  text-align: center;
+  list-style-type: none;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ingredients > li {
+  padding: 20px;
+  list-style-type: none;
+}
+
+.ingredients strong {
+  display: block;
+}
