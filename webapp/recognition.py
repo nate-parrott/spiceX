@@ -81,7 +81,7 @@ class RecognizeAndRecommend(webapp2.RequestHandler):
     def post(self):
         if self.request.get('debug_foods'):
             foods = self.request.get('debug_foods').split('//')
-            food_scores = None
+            food_scores = [[food, 1] for food in foods]
         else:
             data = b64decode(self.request.get('data').split('base64,', 1)[1])
             food_scores = recognize_google(data)['foods']

@@ -1,9 +1,16 @@
 function gotFood(food) {
   console.log(food)
+  food = food || {recommendations: [], food_scores: []};
   
   let $main = $('#main').empty();
   let $header = $('<div></div>').addClass('header').appendTo($main);
   let $recipes = $('<div></div>').addClass('recipes').appendTo($main);
+  
+  let $info = $('<div></div>').addClass('info');
+  if (location.search.indexOf('info') >= 0) {
+    $info.appendTo($main);
+  }
+  $info.text("I see: " + JSON.stringify(food.food_scores));
   
   let foodNames = [];
   let recipesByFood = {};
