@@ -9,3 +9,11 @@ _How will this work? Here's an idea:_
 [https://spicexbrown.appspot.com](https://spicexbrown.appspot.com)
 
 [Doc for notes](https://docs.google.com/a/brown.edu/document/d/1trEixanEznd0PjVrBvfIbYg7RRwER54C_jklffTsIRM/edit?usp=sharing)
+
+## Running the Spice UI
+
+On the device, go to http://spicexbrown.appspot.com/spicex (or localhost:8080/spicex).
+
+(The camera server must also be running on the device -- run `python camera_server.py camera`)
+
+To debug locally without a camera, run http://spicexbrown.appspot.com/spicex?debug=1. The "camera" will "see" a waffle, and chicken. haha

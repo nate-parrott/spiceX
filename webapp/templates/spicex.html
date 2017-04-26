@@ -5,7 +5,9 @@
   
   <!-- setting DEBUG_FOODS bypasses the camera -->
   <script>
-    DEBUG_FOODS = ['waffle', 'meal', 'food', 'chicken']
+    if (location.search.indexOf('debug') > -1) {
+      DEBUG_FOODS = ['waffle', 'meal', 'food', 'chicken']
+    }
   </script>
   <script src='/static/ui.js'></script>
   
