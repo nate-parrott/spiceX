@@ -51,13 +51,7 @@ function postImageData(data, callback) {
 //   })
 // })
 
-if (window.DEBUG_FOODS) {
-  $.post('/recognize_and_recommend', {debug_foods: window.DEBUG_FOODS.join('//')}, function(resp) {
-    window.gotFood(JSON.parse(resp));
-  })
-}
-
-let cameraLoopInterval = 300;
+let cameraLoopInterval = 200;
 
 class FoodRecognizer {
   constructor() {
@@ -88,7 +82,7 @@ class FoodRecognizer {
         console.log('schedule capture');
         // let's schedule a capture:
         this.prevImage = image;
-        this.timeLeftBeforeSendingImage = 600;
+        this.timeLeftBeforeSendingImage = 400;
       } else if (this.prevImage === null) {
         this.prevImage = image;
       }
@@ -112,7 +106,13 @@ class FoodRecognizer {
 }
 
 $(function() {
+  window.gotFood(null);
   if (!window.DEBUG_FOODS) {
     window.rec = new FoodRecognizer();
+  } else {
+    // the camera sees fake debug foods 
+    $.post('/recognize_and_recommend', {debug_foods: window.DEBUG_FOODS.join('//')}, function(resp) {
+      window.gotFood(JSON.parse(resp));
+    })
   }
 });
