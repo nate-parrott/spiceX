@@ -84,7 +84,7 @@ class RecognizeAndRecommend(webapp2.RequestHandler):
             food_scores = [[food, 1] for food in foods]
         else:
             data = b64decode(self.request.get('data').split('base64,', 1)[1])
-            food_scores = recognize_clarifai(data)['foods']
+            food_scores = recognize_google(data)['foods']
             foods = [f[0] for f in food_scores]
         print 'FOODS:', foods
         recommendations = get_recommendations(foods)

@@ -51,52 +51,52 @@ function postImageData(data, callback) {
 //   })
 // })
 
-let cameraLoopInterval = 200;
+let cameraLoopInterval = 150;
 
 class FoodRecognizer {
-  constructor() {
-    this.timeLeftBeforeSendingImage = null;
-    this.prevImage = null;
-    this.mostRecentImage = null;
+  constructor() {    
+    this.lastQueriedImage = null;
+    this.lastFrameImage = null;
+    
     this.fetchCount = 0;
     this.lastRec = null;
     this.cameraLoop();
   }
   cameraLoop() {
     this.updateStatus();
+    
     console.log('loop');
+    
     getImageData('http://localhost:8999/', (image) => {
-      this.mostRecentImage = image;
-      if (this.timeLeftBeforeSendingImage !== null) {
-        this.timeLeftBeforeSendingImage -= cameraLoopInterval;
-        if (this.timeLeftBeforeSendingImage <= 0) {
-          console.log('capture now')
-          // we are capturing an image now:
+      let loopAgain = () => {
+        setTimeout(() => this.cameraLoop(), cameraLoopInterval);
+      }
+      
+      let imageIsStill = this.lastFrameImage && !imagesAreDifferent(image, this.lastFrameImage);
+      this.lastFrameImage = image;
+      if (imageIsStill) {
+        let isDifferentFromLastQueried = !this.lastQueriedImage || imagesAreDifferent(image, this.lastQueriedImage);
+        if (isDifferentFromLastQueried) {
+          // capture now:
+          console.log('capturing now');
+          this.lastQueriedImage = image;
           this.sendImage(() => {
-            setTimeout(() => this.cameraLoop(), cameraLoopInterval);
+            loopAgain();
           });
-          return;
+        } else {
+          loopAgain();
         }
+      } else {
+        loopAgain();
       }
-      if (this.timeLeftBeforeSendingImage === null && this.prevImage && image && imagesAreDifferent(image, this.prevImage)) {
-        console.log('schedule capture');
-        // let's schedule a capture:
-        this.prevImage = image;
-        this.timeLeftBeforeSendingImage = 100;
-      } else if (this.prevImage === null) {
-        this.prevImage = image;
-      }
-      setTimeout(() => this.cameraLoop(), cameraLoopInterval);
     })
   }
   sendImage(callback) {
-    this.timeLeftBeforeSendingImage = null;
     this.fetchCount++;
     // use this.mostRecentImage
-    postImageData(this.mostRecentImage, (results) => {
+    postImageData(this.lastFrameImage, (results) => {
       this.lastRec = results;
       window.gotFood(results);
-      console.log(results)
       callback();
     })
   }
