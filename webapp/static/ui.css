@@ -6,6 +6,7 @@ html, body, #main {
   padding: 0;
   margin: 0;
   height: 100%;
+  overflow: hidden;
 }
 
 
@@ -25,7 +26,7 @@ html, body, #main {
 #main {
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: #eee;
   font-family: 'Apercu';
   font-size: 20px;
 }
@@ -44,34 +45,65 @@ html, body, #main {
   padding: 16px;
   font-weight: bold;
   text-transform: uppercase;
+  transition: opacity .15s;
+}
+
+#main .header > div:hover {
+  cursor: pointer;
+  opacity: .7;
 }
 
 #main .header > div.selected {
   opacity: 1;
 }
 
-#main .recipes {
-  flex-grow: 1;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  white-space: nowrap;
+.container, .recipes, .recipe, .card {
   position: relative;
-  padding-left: 50px;
-  padding-right: 50px;
+  box-sizing: border-box;
 }
 
-#main .recipes .recipe {
-  display: inline-block;
-  width: 700px;
-  vertical-align: top;
+.container {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  padding: 20px;
 }
 
-#main .recipes .recipe .card  {
-  white-space: normal;
-  margin: 25px;
-  padding: 25px;
-  background-color: #eee;
+.recipes {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  margin: 0;
+  padding: 0;
+  height:100%;
+
+  list-style-type: none;
+
+  -webkit-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.recipes .recipe {
   text-align: center;
+  cursor: pointer;
+
+  float: left;
+  width: 50vw;
+  min-width: 380px;
+  height: 100%;
+  margin: 0;
+  margin-right: 20px;
+  padding: 0;
+
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  -o-border-radius: 30px;
+  -moz-border-radius: 30px;
+  background-color: #ffffff;
 }
 
 h1 {

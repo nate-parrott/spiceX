@@ -1,9 +1,10 @@
 function gotFood(food) {
-  console.log(food)
+  console.log(food);
   
   let $main = $('#main').empty();
   let $header = $('<div></div>').addClass('header').appendTo($main);
-  let $recipes = $('<div></div>').addClass('recipes').appendTo($main);
+  let $container = $('<div></div>').addClass('container').appendTo($main);
+  let $recipes = $('<ul></ul>').addClass('recipes').appendTo($container);
   
   let foodNames = [];
   let recipesByFood = {};
@@ -15,11 +16,14 @@ function gotFood(food) {
     $recipes.empty();
     recipesByFood[foodName].map((recipe) => {
       $recipes.append(renderRecipe(recipe));
-    })
+    });
+
+    // Make recipes a swipe carousel
+    $recipes.itemslide();
   }
   
   let renderRecipe = (recipe) => {
-    let $card = $('<div></div>').addClass('card');
+    let $card = $('<li></li>').addClass('recipe');
     $('<h1></h1>').text(recipe.title).appendTo($card);
     $('<p></p>').addClass('description').text(recipe.description).appendTo($card);
     let $ingredients = $('<ul></ul').addClass('ingredients').appendTo($card);
@@ -32,7 +36,8 @@ function gotFood(food) {
     if (recipe.extra_instructions) {
       $('<p></p>').addClass('extra').text(recipe.extra_instructions).appendTo($card);
     }
-    return $('<div></div>').addClass('recipe').append($card);
+
+    return $card;
   }
   
   food.recommendations.forEach((obj, i) => {
