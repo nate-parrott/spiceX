@@ -11,3 +11,5 @@ handlers:
 libraries:
 - name: jinja2
   version: latest
+- name: PIL
+  version: latest

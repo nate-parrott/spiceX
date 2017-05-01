@@ -82,7 +82,7 @@ class FoodRecognizer {
         console.log('schedule capture');
         // let's schedule a capture:
         this.prevImage = image;
-        this.timeLeftBeforeSendingImage = 400;
+        this.timeLeftBeforeSendingImage = 100;
       } else if (this.prevImage === null) {
         this.prevImage = image;
       }
