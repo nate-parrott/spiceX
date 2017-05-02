@@ -1,3 +1,4 @@
+
 function gotFood(food) {
   console.log(food)
   food = food || {recommendations: [], food_scores: []};
@@ -25,8 +26,21 @@ function gotFood(food) {
       $recipes.append(renderRecipe(recipe));
     });
 
+    let selectedRecipe = (recipe) => {
+      setLeds(recipe.led_pins);      
+    };
+
     // Make recipes a swipe carousel
     $recipes.itemslide();
+    $recipes.on('changeActiveIndex', function(e) {
+      let recipe = recipesByFood[foodName][$recipes.getActiveIndex()];
+      selectedRecipe(recipe);
+    });
+    
+    if (recipesByFood[foodName].length) {
+      let initialRecipe = recipesByFood[foodName];
+      selectedRecipe(recipesByFood[foodName][0]);
+    }
   }
   
   let renderRecipe = (recipe) => {

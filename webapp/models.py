@@ -19,11 +19,17 @@ class Recipe(ndb.Model):
     enabled = ndb.BooleanProperty(default=False)
     
     def json(self):
+        from recipes import ingredients
+        
+        ingredient_ids = set([i['ingredient'] for i in self.ingredients])
+        led_pins = [i['pin'] for i in ingredients if i['id'] in ingredient_ids and i.get('pin') is not None]
+        
         return {
             "title": self.title,
             "description": self.description,
             "ingredients": self.ingredients,
             "extra_instructions": self.extra_instructions,
             "spicyness": self.spicyness,
-            "sweetness": self.sweetness
+            "sweetness": self.sweetness,
+            "led_pins": led_pins
         }
