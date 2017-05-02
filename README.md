@@ -12,8 +12,12 @@ _How will this work? Here's an idea:_
 
 ## Running the Spice UI
 
-On the device, go to http://spicexbrown.appspot.com/spicex (or localhost:8080/spicex).
+Before running the UI, you need to run the `piserver` program, which lets the web-based UI connect to the Pi camera and LED hardware. Run it by typing:
 
-(The camera server must also be running on the device -- run `python camera_server.py camera`)
+`./piserver/piserver.py`
+
+Now, on the device, go to http://spicexbrown.appspot.com/spicex (or localhost:8080/spicex).
+
+Go to http://spicexbrown.appspot.com/spicex?info=1 to see what the camera is currently seeing.
 
 To debug locally without a camera, run http://spicexbrown.appspot.com/spicex?debug=1. The "camera" will "see" a waffle, and chicken. haha
