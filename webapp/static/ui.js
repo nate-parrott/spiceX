@@ -33,11 +33,13 @@ function gotFood(food) {
     let $card = $('<li></li>').addClass('recipe');
     $('<h1></h1>').text(recipe.title).appendTo($card);
     $('<p></p>').addClass('description').text(recipe.description).appendTo($card);
-    let $ingredients = $('<ul></ul').addClass('ingredients').appendTo($card);
+    let $ingredients = $('<ul></ul>').addClass('ingredients').appendTo($card);
     recipe.ingredients.forEach((ingredient) => {
       let $li = $('<li></li>').appendTo($ingredients);
-      $li.append($('<strong></strong>').addClass('ingredient').text(ingredient.ingredient));
-      $li.append($('<span></span>').addClass('amount').text(ingredient.amount));
+      let $fakeImage = $('<div></div>').addClass('fake-image').appendTo($li);
+      let $ingredientInfo = $('<div></div>').addClass('ingredient-info').appendTo($li);
+      $ingredientInfo.append($('<strong></strong>').addClass('ingredient-name').text(ingredient.ingredient));
+      $ingredientInfo.append($('<span></span>').addClass('ingredient-amount').text(ingredient.amount));
       return $li
     });
     if (recipe.extra_instructions) {
@@ -62,4 +64,7 @@ function gotFood(food) {
   if (foodNames.length > 0) {
     selectFood(foodNames[0]);
   }
+
+  // TODO : replace '?' with actual icon
+  let $help = $('<div></div>').addClass('help').text("?").appendTo($header);
 }
