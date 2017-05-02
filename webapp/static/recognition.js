@@ -67,7 +67,7 @@ class FoodRecognizer {
     
     console.log('loop');
     
-    getImageData('http://localhost:8999/', (image) => {
+    getImageData('http://localhost:8999/camera', (image) => {
       let loopAgain = () => {
         setTimeout(() => this.cameraLoop(), cameraLoopInterval);
       }

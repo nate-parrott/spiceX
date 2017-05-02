@@ -2,13 +2,13 @@
   {
     "id": "cumin",
     "name": "Cumin",
-    "light": 1,
+    "pin": 1,
     "pic": "cumin.png"
   },
   {
     "id": "chili",
     "name": "Chili Powder",
-    "light": 2,
+    "pin": 2,
     "pic": "chili.png"
   }
 ]
