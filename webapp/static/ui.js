@@ -45,12 +45,24 @@ function gotFood(food) {
   
   let renderRecipe = (recipe) => {
     let $card = $('<li></li>').addClass('recipe');
+    $('<div></div>').addClass('recipe-icon').appendTo($card); // TODO: add in real recipe icons
     $('<h1></h1>').text(recipe.title).appendTo($card);
+
+    // add spiciness rating
+    let $spiciness = $('<div></div>').addClass('spiciness').appendTo($card);
+    $spiciness.append($('<div></div>').addClass('spiciness-label').text('spiciness'));
+    for (let i = 0; i < recipe.spicyness; i++) {
+      $spiciness.append($('<div></div>').addClass('spicy'));
+    }
+    for (let i = 0; i < (5 - recipe.spicyness); i++) {
+      $spiciness.append($('<div></div>').addClass('unspicy'));
+    }
+    
     $('<p></p>').addClass('description').text(recipe.description).appendTo($card);
     let $ingredients = $('<ul></ul>').addClass('ingredients').appendTo($card);
     recipe.ingredients.forEach((ingredient) => {
       let $li = $('<li></li>').appendTo($ingredients);
-      let $fakeImage = $('<div></div>').addClass('fake-image').appendTo($li);
+      $('<div></div>').addClass('fake-image').appendTo($li); // TODO: add in real spice images
       let $ingredientInfo = $('<div></div>').addClass('ingredient-info').appendTo($li);
       $ingredientInfo.append($('<strong></strong>').addClass('ingredient-name').text(ingredient.ingredient));
       $ingredientInfo.append($('<span></span>').addClass('ingredient-amount').text(ingredient.amount));
@@ -69,16 +81,16 @@ function gotFood(food) {
       recipesByFood[foodName] = obj.recipes;
       foodNames.push(foodName);
       
-      let label = $('<div></div>').text(foodName).click(() => {
+      let label = $('<div></div>').addClass('food').text(foodName).click(() => {
         selectFood(foodName);
       }).appendTo($header);
     }
   });
+
+  $header.append($('<div></div>').addClass('help'));
   
   if (foodNames.length > 0) {
     selectFood(foodNames[0]);
   }
 
-  // TODO : replace '?' with actual icon
-  let $help = $('<div></div>').addClass('help').text("?").appendTo($header);
 }
