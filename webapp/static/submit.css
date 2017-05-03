@@ -11,16 +11,69 @@ form section {
   margin-bottom: 70px;
 }
 
-.label-input label {
-/*  display: block;
-*/}
+#intro h1 {
+  margin: 0;
+}
 
-input[type=text] {
+form p {
+  width: 70%;
+  opacity: 0.5;
+}
+
+.label-input label {
+  display: block;
+  margin-bottom: 1em;
+}
+
+.label-input {
+  margin-bottom: 1em;
+}
+
+.slider-container {
+  font-size: small;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: gray;
+}
+
+.slider-container input {
+  position: relative;
+  margin-left: 1em;
+  margin-right: 1em;
+  top: 3px;
+}
+
+input[type=text], textarea {
   appearance: none;
   outline: none;
   font-size: 1em;
   font-family: inherit;
-  border: 0px solid black;
+  box-sizing: border-box;
+  width: 60%;
+  padding: 1em;
+  border: 1px solid rgba(0,0,0,0.3);
+/*  border: 0px solid black;
   border-bottom: 2px solid gray;
-  background-color: transparent;
+  background-color: transparent;*/
+}
+
+#ingredients ul {
+  padding: 0;
+}
+
+#ingredients li {
+  list-style-type: none;
+  margin: 1em;
+  color: gray;
+}
+
+#ingredients .amount {
+  display: none;
+  font-size: small;
+  margin: 1em;
+}
+
+#ingredients .amount input[type=text] {
+  width: 200px;
+  margin-left: 1em;
 }

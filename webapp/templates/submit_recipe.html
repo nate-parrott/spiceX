@@ -12,7 +12,7 @@
 {% block content %}
 
 <form id='submit_recipe' method='POST'>
-  <section>
+  <section id='intro'>
     <h1>Submit a Recipe</h1>
     <p>
       Have a killer recipe for spicing up bland food? Submit it, and we'll share it with people using the SpiceX kiosk.
@@ -39,43 +39,45 @@
   <section>
     <h2>How would you describe it?</h2>
     <div class='label-input'>
-      <label>Recipe title</label>
+      <label>Recipe title:</label>
       <input name='title' placeholder='Chili Chicken' type='text'/>
     </div>
     <div class='label-input'>
-      <label>Recipe description</label>
-      <input name='description' placeholder='' type='text'/>
+      <label>Recipe description:</label>
+      <textarea name='description'></textarea>
     </div>
   </section>
   
-  <section>
+  <section id='ingredients'>
     <h2>Ingredients</h2>
     <ul>
       {% for ingredient in ingredients %}
         <li>
           <div>
-            <input type='checkbox' name='{{ ingredient.id }}_ingredient'/>
-            <span class='name'>{{ ingredient.name }}</span>
+            <input type='checkbox' name='{{ ingredient.id }}_ingredient' id='{{ ingredient.id }}_checkbox' />
+            <label class='name' for='{{ ingredient.id }}_checkbox'>{{ ingredient.name }}</label>
           </div>
-          <div>
+          <div class='amount'>
             <label>Amount:</label>
             <input name='{{ ingredient.id }}_ingredient_amount' placeholder='Two shakes' type='text'/>
           </div>
         </li>
       {% endfor %}
     </ul>
-    <div>
-      <label>Any extra preparation instructions? (optional)</label>
-      <input name='extra_prep' type='text'/>
+    <div class='label-input'>
+      <label>Any extra preparation instructions?: (optional)</label>
+      <textarea name='extra_prep'></textarea>
     </div>
   </section>
   
   <section>
     <h2>Flavor</h2>
     {% for attrib in flavor_attribs %}
-      <div>
+      <div class='label-input'>
         <label>{{ attrib.label }}</label>
-        <input type="range" name="{{ attrib.name }}" min="1" max="5" value="3" />
+        <div class='slider-container'>
+          Least <input type="range" name="{{ attrib.name }}" min="1" max="5" value="3" /> Most
+        </div>
       </div>
     {% endfor %}
   </section>
@@ -84,5 +86,11 @@
     <input type='submit'/>
   </section>
 </form>
+
+<script>
+  $('#ingredients input[type=checkbox]').change((e) => {
+    $(e.target).closest('li').find('.amount').toggle();
+  })
+</script>
 
 {% endblock %}
