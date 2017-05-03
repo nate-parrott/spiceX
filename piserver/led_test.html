@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<body>
+  <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+  
+  <div id='buttons'></div>
+  <script>
+    let $buttons = $('#buttons');
+    
+    let num_leds = 17;
+    for (let i=0; i<num_leds; i++) {
+      let $button = $("<button></button>").text("Turn on light #" + i).click(() => {
+        $.post('/leds?pins='+i);
+      }).css({display: 'block', margin: 10}).appendTo($buttons)
+    }  
+  </script>
+</body>

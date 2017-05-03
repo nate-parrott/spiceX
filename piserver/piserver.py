@@ -5,9 +5,6 @@ import sys, os
 from StringIO import StringIO
 from urlparse import urlparse, parse_qs
 
-MIN_LED_PIN = 1
-MAX_LED_PIN = 7
-
 zoom = 1
 for arg in sys.argv[1:]:
     if arg.startswith('--zoom='):
@@ -15,13 +12,19 @@ for arg in sys.argv[1:]:
         print 'Zoom:', zoom
 
 try:
-    from shiftpi.shiftpi import HIGH, LOW, ALL, digitalWrite, delay, shiftRegisters
+    # from shiftpi.shiftpi import HIGH, LOW, ALL, digitalWrite, delay, shiftRegisters
+    import RPi.GPIO as GPIO
+    GPIO.setmode(GPIO.BOARD)
+    led_pins = [7, 11, 12, 13, 15, 16, 18, 22, 29, 31, 32, 33, 35, 36, 37, 38, 40]
+    for pin in led_pins:
+        GPIO.setup(pin, GPIO.OUT)
     print 'LEDs available'
     leds_available = True
-    shiftRegisters(2)
 except ImportError:
     print 'LEDs unavailable -- install rpi-gpi'
     leds_available = False
+
+# GPIO.output(7, True)
 
 try:
     import picamera
@@ -77,9 +80,7 @@ class ImageFromCamera(object):
 def set_active_leds(leds):
     print 'Setting active leds:', leds
     if leds_available:
-        # shiftRegisters(2) # this is done up-top instead
-        for pin in range(MIN_LED_PIN, MAX_LED_PIN+1):
-            digitalWrite(pin, (HIGH if pin in leds else LOW))
+        GPIO.output(pin, (idx in leds))
     else:
         print ' (LEDs not available, so not doing anything real)'
 
@@ -106,6 +107,8 @@ class Handler(BaseHTTPRequestHandler):
             self.respond(data=imager.get_image(), content_type='image/jpeg')
         elif self.endpoint() == '/':
             self.respond(data='Try /camera')
+        elif self.endpoint() == '/led_test':
+            self.respond(data=open('led_test.html').read(), content_type='text/html')
         else:
             self.respond(status=404, data='Unknown path')
     
