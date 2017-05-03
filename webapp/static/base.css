@@ -1,12 +1,53 @@
+@font-face {
+    font-family: 'Apercu';
+    src: url('/static/fonts/Apercu/Apercu_Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Apercu';
+    src: url('/static/fonts/Apercu/Apercu_Bold.otf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'Apercu';
+    src: url('/static/fonts/Apercu/Apercu_Bold_Italic.otf') format('opentype');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Apercu';
+    src: url('/static/fonts/Apercu/Apercu_Italic.otf') format('opentype');
+    font-weight: normal;
+    font-style: italic;
+}
+
 body {
   font-family: sans-serif;
+  background-color: #f6f6f6;
+  font-family: 'Apercu', sans-serif;
   margin: 0;
 }
 
 #header {
-  background-color: #222;
+  background-image: url(/static/pinkdust.png);
+  background-size: 200px;
   color: white;
   padding: 10px 20px;
+}
+
+#header h1 {
+  font-size: 1.1em;
+  font-weight: normal;
+}
+
+#header a {
+  text-decoration: none;
 }
 
 a {

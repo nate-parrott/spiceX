@@ -1,8 +1,23 @@
 {% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+<link rel='stylesheet' href='/static/submit.css'/>
+{% endblock %}
+
+{% block currentLocation %}
+<span style='opacity: 0.5'>– Submit a Recipe</span>
+{% endblock %}
+
 {% block content %}
 
 <form id='submit_recipe' method='POST'>
-  <h1>Submit a Recipe</h1>
+  <section>
+    <h1>Submit a Recipe</h1>
+    <p>
+      Have a killer recipe for spicing up bland food? Submit it, and we'll share it with people using the SpiceX kiosk.
+    </p>
+  </section>
   
   {% if error %}
   <section>
@@ -22,12 +37,12 @@
     <input name='foods' type='text' placeholder='chicken, vegetables' />
   </section>
   <section>
-    <h2>Recipe info</h2>
-    <div>
+    <h2>How would you describe it?</h2>
+    <div class='label-input'>
       <label>Recipe title</label>
       <input name='title' placeholder='Chili Chicken' type='text'/>
     </div>
-    <div>
+    <div class='label-input'>
       <label>Recipe description</label>
       <input name='description' placeholder='' type='text'/>
     </div>

@@ -1,0 +1,26 @@
+form h1 {
+  font-size: 3em;
+}
+
+form {
+  font-size: large;
+}
+
+form section {
+  margin-top: 70px;
+  margin-bottom: 70px;
+}
+
+.label-input label {
+/*  display: block;
+*/}
+
+input[type=text] {
+  appearance: none;
+  outline: none;
+  font-size: 1em;
+  font-family: inherit;
+  border: 0px solid black;
+  border-bottom: 2px solid gray;
+  background-color: transparent;
+}
