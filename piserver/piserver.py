@@ -81,7 +81,7 @@ def set_active_leds(leds):
     print 'Setting active leds:', leds
     if leds_available:
         for idx, pin in enumerate(led_pins):
-        GPIO.output(pin, (idx in leds))
+            GPIO.output(pin, (idx in leds))
     else:
         print ' (LEDs not available, so not doing anything real)'
 
