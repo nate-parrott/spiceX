@@ -8,6 +8,12 @@ from urlparse import urlparse, parse_qs
 MIN_LED_PIN = 1
 MAX_LED_PIN = 7
 
+zoom = 1
+for arg in sys.argv[1:]:
+    if arg.startswith('--zoom='):
+        zoom = float(arg.split('--zoom=')[1])
+        print 'Zoom:', zoom
+
 try:
     from shiftpi.shiftpi import HIGH, LOW, ALL, digitalWrite, delay, shiftRegisters
     print 'LEDs available'
@@ -30,7 +36,14 @@ python camera_server.py camera
  ~or~
 python camera_server.py <path to jpeg>
  (for testing purposes)
+
+optional argument:
+--zoom=2 zooms in
 """
+
+def compute_zoom_rect(zoom_scale):
+    w = 1.0 / zoom_scale
+    return ((1-w)/2, (1-w)/2, w, w)
 
 # these classes both provide an image -- one is a fake image from a file (for debugging), and one is a real image from the pi's camera
 
@@ -51,6 +64,7 @@ class ImageFromFile(object):
 class ImageFromCamera(object):
     def __init__(self):
         self.camera = picamera.PiCamera()
+        self.camera.zoom = compute_zoom_rect(zoom)
         # original res: 3280 x 2464
         self.camera.resolution = (820, 616)
     
