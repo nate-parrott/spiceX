@@ -32,14 +32,17 @@ html, body, #main {
 }
 
 #main .header {
-  background-color: #eee;
+  background-color: #fff;
   white-space: nowrap;
 /*  overflow-x: auto; */
   padding-left: 8px;
+  padding-right: 8px;
   height: 60px;
+  position: relative;
+  box-sizing: border-box;
 }
 
-#main .header > div {
+.food {
   opacity: 0.5;
   display: inline-block;
   padding: 16px;
@@ -48,22 +51,34 @@ html, body, #main {
   transition: opacity .15s;
 }
 
-#main .header > div:hover {
+.help {
+  padding: 0;
+  margin: 0 16px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 24px;
+  height: 100%;
+  background: url('icons/help.svg');
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.food:hover, .help:hover{
   cursor: pointer;
   opacity: .7;
 }
-
-#main .header > div.selected {
+.food.selected, .help.selected {
   opacity: 1;
 }
 
-.container, .recipes, .recipe, .card {
+.container, .recipes, .recipe, .card, .spiciness {
   position: relative;
   box-sizing: border-box;
 }
 
 .container {
-  position: relative;
   width: 100%;
   flex: 1;
   padding: 20px;
@@ -92,41 +107,123 @@ html, body, #main {
   cursor: pointer;
 
   float: left;
-  width: 50vw;
-  min-width: 380px;
-  height: 100%;
+  width: 380px;
+  height: auto;
+  min-height: 400px;
   margin: 0;
   margin-right: 20px;
-  padding: 0;
+  padding: 16px;
 
-  border-radius: 30px;
-  -webkit-border-radius: 30px;
-  -o-border-radius: 30px;
-  -moz-border-radius: 30px;
+  border-radius: 11px;
+  -webkit-border-radius: 11px;
+  -o-border-radius: 11px;
+  -moz-border-radius: 11px;
   background-color: #ffffff;
 }
 
+.recipe-icon {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  background-color: #eee;
+  margin: 0 auto;
+  border-radius: 64px;
+}
+
+h1, .description, .spiciness {
+  -webkit-margin-before: 0em;
+  -webkit-margin-after: 0em;
+  
+}
+
 h1 {
-  font-size: 1.5em;
+  font-size: 28px;
+  text-transform: capitalize;
+  font-weight: 400;
+  margin: 20px 0 4px 0;
+}
+
+.description {
+  font-size: .8em;
+  font-style: italic;
+  margin: 16px 0;
+}
+
+.spiciness {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 60%;
+}
+
+.spiciness-label {
+  text-transform: uppercase;
+  font-size: .7em;
+  margin-right: 24px;
+}
+
+.spiciness .spicy, .spiciness .unspicy {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  background: url('icons/chili-pepper.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  margin-right: 4px;
+}
+
+.spiciness .spicy {
+  opacity: 1;
+}
+
+.spiciness .unspicy {
+  opacity: .3;
 }
 
 .ingredients {
-  text-align: center;
   list-style-type: none;
   padding-left: 10px;
   padding-right: 10px;
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 .ingredients > li {
-  padding: 20px;
+  padding: 22px 50px;
   list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  -webkit-justify-content: flex-start; /* Safari */
+  justify-content:         flex-start;
+  -webkit-align-items: center; /* Safari */
+  align-items:         center;
+}
+
+.fake-image {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  background-color: #eee;
+  border-radius: 70px;
+  margin-right: 25px;
+}
+
+.ingredient-info {
+  text-align: left;
+  height: auto;
+  flex: 1;
 }
 
 .ingredients strong {
   display: block;
+}
+
+.ingredient-amount {
+  font-size: 18px;
 }
 
 .info {
