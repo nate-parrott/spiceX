@@ -77,3 +77,29 @@ input[type=text], textarea {
   width: 200px;
   margin-left: 1em;
 }
+
+form .message, form .error {
+  display: inline-block;
+  background-color: green;
+  color: white;
+  padding: 1em;
+  width: auto;
+}
+
+form .error {
+  background-color: red;
+}
+
+form input[type=submit] {
+  appearance: none;
+  border: none;
+  background-color: #555;
+  color: white;
+  padding: 1em 2em;
+  font-family: inherit;
+  font-size: 1em;
+}
+
+form input[type=submit]:hover {
+  background-color: #333;
+}
