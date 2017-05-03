@@ -12,6 +12,7 @@ try:
     from shiftpi.shiftpi import HIGH, LOW, ALL, digitalWrite, delay, shiftRegisters
     print 'LEDs available'
     leds_available = True
+    shiftRegisters(2)
 except ImportError:
     print 'LEDs unavailable -- install rpi-gpi'
     leds_available = False
@@ -62,7 +63,7 @@ class ImageFromCamera(object):
 def set_active_leds(leds):
     print 'Setting active leds:', leds
     if leds_available:
-        shiftRegisters(2)
+        # shiftRegisters(2) # this is done up-top instead
         for pin in range(MIN_LED_PIN, MAX_LED_PIN+1):
             digitalWrite(pin, (HIGH if pin in leds else LOW))
     else:
