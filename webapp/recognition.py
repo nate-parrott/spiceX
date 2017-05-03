@@ -3,13 +3,15 @@ from requests import post
 from base64 import b64encode, b64decode
 import json
 from recommendations import get_recommendations
+from clarifai_token import get_clarifai_token
 
 secrets = json.load(open('secrets.json'))
 
 def recognize_clarifai(data):
+    token = get_clarifai_token()
     headers = {
         "Content-Type": "application/json",
-        "Authorization": "Bearer {}".format(secrets['clarifai_token'])
+        "Authorization": "Bearer {}".format(get_clarifai_token())
     }
     req = {
       "inputs": [
@@ -84,7 +86,7 @@ class RecognizeAndRecommend(webapp2.RequestHandler):
             food_scores = [[food, 1] for food in foods]
         else:
             data = b64decode(self.request.get('data').split('base64,', 1)[1])
-            food_scores = recognize_google(data)['foods']
+            food_scores = recognize_clarifai(data)['foods']
             foods = [f[0] for f in food_scores]
         print 'FOODS:', foods
         recommendations = get_recommendations(foods)
