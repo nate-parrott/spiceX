@@ -5,6 +5,8 @@ function gotFood(food) {
   
   let $main = $('#main').empty();
   let $header = $('<div></div>').addClass('header').appendTo($main);
+  $header.append($('<div></div>').addClass('eating-label').text("I'm eating..."));
+  let $nav = $('<div></div>').addClass('nav').appendTo($header);
   let $container = $('<div></div>').addClass('container').appendTo($main);
   let $recipes = $('<ul></ul>').addClass('recipes').appendTo($container);
   
@@ -18,16 +20,16 @@ function gotFood(food) {
   let recipesByFood = {};
   
   let selectFood = (foodName) => {
-    $header.children().removeClass('selected');
+    $nav.children().removeClass('selected');
     let idx = foodNames.indexOf(foodName);
-    $($header.children().get(idx)).addClass('selected');
+    $($nav.children().get(idx)).addClass('selected');
     $recipes.empty();
     recipesByFood[foodName].map((recipe) => {
       $recipes.append(renderRecipe(recipe));
     });
 
     let selectedRecipe = (recipe) => {
-      setLeds(recipe.led_pins);      
+      //setLeds(recipe.led_pins); // Currently removed because it was throwing errors and messing with my sliding! >:( 
     };
 
     // Make recipes a swipe carousel
@@ -44,12 +46,13 @@ function gotFood(food) {
   }
   
   let renderRecipe = (recipe) => {
-    let $card = $('<li></li>').addClass('recipe');
-    $('<div></div>').addClass('recipe-icon').appendTo($card); // TODO: add in real recipe icons
-    $('<h1></h1>').text(recipe.title).appendTo($card);
+    let $card = $('<li></li>').addClass('recipe-container');
+    let $recipe = $('<div></div>').addClass('recipe').appendTo($card);
+    $('<div></div>').addClass('recipe-icon').appendTo($recipe); // TODO: add in real recipe icons
+    $('<h1></h1>').text(recipe.title).appendTo($recipe);
 
     // add spiciness rating
-    let $spiciness = $('<div></div>').addClass('spiciness').appendTo($card);
+    let $spiciness = $('<div></div>').addClass('spiciness').appendTo($recipe);
     $spiciness.append($('<div></div>').addClass('spiciness-label').text('spiciness'));
     for (let i = 0; i < recipe.spicyness; i++) {
       $spiciness.append($('<div></div>').addClass('spicy'));
@@ -58,8 +61,8 @@ function gotFood(food) {
       $spiciness.append($('<div></div>').addClass('unspicy'));
     }
     
-    $('<p></p>').addClass('description').text(recipe.description).appendTo($card);
-    let $ingredients = $('<ul></ul>').addClass('ingredients').appendTo($card);
+    $('<p></p>').addClass('description').text(recipe.description).appendTo($recipe);
+    let $ingredients = $('<ul></ul>').addClass('ingredients').appendTo($recipe);
     recipe.ingredients.forEach((ingredient) => {
       let $li = $('<li></li>').appendTo($ingredients);
       $('<div></div>').addClass('fake-image').appendTo($li); // TODO: add in real spice images
@@ -69,7 +72,7 @@ function gotFood(food) {
       return $li
     });
     if (recipe.extra_instructions) {
-      $('<p></p>').addClass('extra').text(recipe.extra_instructions).appendTo($card);
+      $('<p></p>').addClass('extra').text(recipe.extra_instructions).appendTo($recipe);
     }
 
     return $card;
@@ -83,11 +86,11 @@ function gotFood(food) {
       
       let label = $('<div></div>').addClass('food').text(foodName).click(() => {
         selectFood(foodName);
-      }).appendTo($header);
+      }).appendTo($nav);
     }
   });
 
-  $header.append($('<div></div>').addClass('help'));
+  $nav.append($('<div></div>').addClass('help'));
   
   if (foodNames.length > 0) {
     selectFood(foodNames[0]);
