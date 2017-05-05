@@ -4,6 +4,7 @@ from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 import sys, os
 from StringIO import StringIO
 from urlparse import urlparse, parse_qs
+import time
 
 zoom = 1
 for arg in sys.argv[1:]:
@@ -69,12 +70,20 @@ class ImageFromCamera(object):
         self.camera = picamera.PiCamera()
         self.camera.zoom = compute_zoom_rect(zoom)
         # original res: 3280 x 2464
-        self.camera.resolution = (820, 616)
+        # self.camera.resolution = (820, 616)
+        self.camera.resolution = (597, 431)
+        self.camera.brightness = 75
+        self.camera.contrast = 30
+        self.camera.saturation = 25
+        self.camera.exposure_mode = 'night'
     
     def get_image(self):
+        t = time.time()
         io = StringIO()
-        self.camera.capture(io, format='jpeg')
+        self.camera.capture(io, format='jpeg', use_video_port=True)
+        print "took {} to capture".format(time.time() - t)
         val = io.getvalue()
+        print "took {} to get value".format(time.time() - t)
         return val
 
 def set_active_leds(leds):
