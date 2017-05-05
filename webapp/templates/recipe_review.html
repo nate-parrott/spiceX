@@ -18,6 +18,7 @@
         <p><code>{{ recipe.ingredients }}</code></p>
         <p><em>{{ recipe.extra_prep }}</em></p>
         <button class='enabled-toggle' data-recipe-id='{{ recipe.key.urlsafe() }}' {% if recipe.enabled %}data-recipe-enabled='true'{% endif %}>{% if recipe.enabled %}Disable{% else %}Enable{% endif %}</button>
+        <button class='delete' data-recipe-id='{{ recipe.key.urlsafe() }}'>Delete</button>
     {% endfor %}
   </ul>
 </section>
@@ -29,6 +30,12 @@
     $(e.target).text(newState ? 'Disable' : 'Enable').attr('data-recipe-enabled', newState ? 'true' : '');
     let id = $(e.target).attr('data-recipe-id');
     $.post('/enable_recipe', {id: id, enabled: newState});
+  });
+  
+  $('.delete').click(function(e) {
+    let id = $(e.target).attr('data-recipe-id');
+    $.post('/delete_recipe', {id: id});
+    $(e.target).closest('li').remove();
   });
 </script>
 

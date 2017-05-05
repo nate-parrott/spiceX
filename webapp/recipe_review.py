@@ -25,3 +25,10 @@ class EnableRecipe(webapp2.RequestHandler):
             recipe.enabled = enabled
             recipe.put()
             self.response.write('ok')
+
+class DeleteRecipe(webapp2.RequestHandler):
+    def post(self):
+        if users.is_current_user_admin():
+            id = self.request.get('id')
+            ndb.Key(urlsafe=id).delete()
+            self.response.write('ok')

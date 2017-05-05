@@ -15,14 +15,13 @@
 import webapp2
 from recognition import Recognize, RecognizeBase64, RecognizeAndRecommend, RecTest
 from recipes import SubmitRecipe
-from recipe_review import RecipeReview, EnableRecipe
+from recipe_review import RecipeReview, EnableRecipe, DeleteRecipe
 from recommendations import Recommendations
 from template import template
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
-        self.response.headers['Content-Type'] = 'text/plain'
-        self.response.write('Hello, World!')
+        self.response.write(template('main.html'))
 
 class SpiceXHandler(webapp2.RequestHandler):
     def get(self):
@@ -38,5 +37,6 @@ app = webapp2.WSGIApplication([
     ('/recognize_and_recommend', RecognizeAndRecommend),
     ('/rec_test', RecTest),
     ('/enable_recipe', EnableRecipe),
+    ('/delete_recipe', DeleteRecipe),
     ('/spicex', SpiceXHandler)
 ], debug=True)
