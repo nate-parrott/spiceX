@@ -90,10 +90,32 @@ function gotFood(food) {
     }
   });
 
-  $nav.append($('<div></div>').addClass('help'));
+  $nav.append($('<div></div>').addClass('help')).click(fullscreenShortcut.tapped);
   
   if (foodNames.length > 0) {
     selectFood(foodNames[0]);
   }
 
+}
+
+// secret shortcut: tap four times on the question mark to toggle fullscreen:
+var fullscreenShortcut = {
+  lastTap: 0,
+  count: 0,
+  tapped: function() {
+    let tapMaxDuration = 700;
+    if (Date.now() - fullscreenShortcut.lastTap >= tapMaxDuration) {
+      fullscreenShortcut.count = 0;
+    }
+    fullscreenShortcut.count++;
+    fullscreenShortcut.lastTap = Date.now();
+    if (fullscreenShortcut.count === 4) {
+      // toggle fullscreen:
+      if (screenfull.isFullscreen) {
+        screenfull.exit();
+      } else {
+        screenfull.request();
+      }
+    }
+  }
 }

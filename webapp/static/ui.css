@@ -78,8 +78,7 @@ html, body, #main {
 }
 
 .help {
-  padding: 0;
-  margin: 0 16px;
+  padding: 0 16px;
   position: absolute;
   right: 0;
   top: 0;
