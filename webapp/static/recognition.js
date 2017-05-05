@@ -51,7 +51,7 @@ function postImageData(data, callback) {
 //   })
 // })
 
-let cameraLoopInterval = 150;
+let cameraLoopInterval = 50;
 
 class FoodRecognizer {
   constructor() {    

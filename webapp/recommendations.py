@@ -9,6 +9,9 @@ def json_for_recipes(food, recipes):
     }
 
 def get_recommendations(foods):
+    if len(foods) == 0:
+        return []
+    
     recipes = Recipe.query().filter(Recipe.foods.IN(foods)).filter(Recipe.enabled == True).fetch(limit=100)
     recipes.sort(key=lambda r: r.added, reverse=True)
     
