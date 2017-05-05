@@ -95,13 +95,14 @@ def recognize_google_async(data):
     return future
     
 def recognize_hybrid(data):
-    food_words = ['food' ,'meal']
+    food_words = ['food' ,'meal', 'drink']
     
     google_future = recognize_google_async(data)
     clarifai_future = recognize_clarifai_async(data)
     
     google_foods = google_future()['foods']
     clarifai_foods = clarifai_future()['foods']
+    clarifai_foods = clarifai_foods[:min(len(clarifai_foods), 7)]
     print "google: {0}, clarifai: {1}".format([f[0] for f in google_foods], [f[0] for f in clarifai_foods])
     # is this a food? clarifai always returns foods, so ask google:
     is_food = len([result for result in google_foods if result[0] in food_words])
