@@ -1,5 +1,5 @@
 import webapp2
-from models import Recipe
+from models import Recipe, Whitelist
 import json
 
 def json_for_recipes(food, recipes):
@@ -12,10 +12,14 @@ def get_recommendations(foods):
     recipes = Recipe.query().filter(Recipe.foods.IN(foods)).filter(Recipe.enabled == True).fetch(limit=100)
     recipes.sort(key=lambda r: r.added, reverse=True)
     
+    whitelist = set(Whitelist.get())
+    print whitelist
+    
     results = []
     for food in foods:
-        matching_recipes = [r for r in recipes if food in r.foods]
-        results.append(json_for_recipes(food, matching_recipes))
+        if len(whitelist) == 0 or food in whitelist:
+            matching_recipes = [r for r in recipes if food in r.foods]
+            results.append(json_for_recipes(food, matching_recipes))
     return results
 
 class Recommendations(webapp2.RequestHandler):

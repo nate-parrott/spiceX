@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Recipe whitelist</h1>
+
+<p>If the eatery's menu is known ahead of time, we can create a "whitelist" of allowed foods — other foods won't be recognized, and we won't offer recipes for them.</p>
+
+<form method='POST'>
+  <p>Enter foods (not recipes), separated by blank lines:</p>
+  <p>(leave this box empty to allow any food)</p>
+  <textarea class='large' name='foods'>{{ foods }}</textarea>
+  <p><input type='submit'/></p>
+</form>
+
+{% endblock %}

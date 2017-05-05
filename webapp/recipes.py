@@ -2,7 +2,7 @@ from google.appengine.api import users
 import webapp2
 from template import template
 import json
-from models import Recipe
+from models import Recipe, Whitelist
 
 ingredients = json.load(open('ingredients.json'))
 
@@ -63,3 +63,22 @@ class SubmitRecipe(webapp2.RequestHandler):
             
             return self.render_form(message='Thanks for your submission!')
 
+
+class RecipeWhitelist(webapp2.RequestHandler):
+    def get(self):
+        if users.is_current_user_admin():
+            foods = Whitelist.get()
+            self.response.write(template('whitelist.html', {'foods': '\n'.join(foods)}))
+        elif users.get_current_user():
+            return self.redirect(users.create_logout_url('/whitelist'))
+        else:
+            return self.redirect(users.create_login_url('/whitelist'))
+    
+    def post(self):
+        if users.is_current_user_admin():
+            foods = self.request.get('foods').split('\n')
+            foods = [f.lower().strip() for f in foods]
+            foods = [f for f in foods if len(f)]
+            Whitelist.set(foods)
+            self.response.write(template('whitelist.html', {'foods': '\n'.join(foods)}))
+        

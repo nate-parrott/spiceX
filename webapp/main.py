@@ -14,7 +14,7 @@
 
 import webapp2
 from recognition import Recognize, RecognizeBase64, RecognizeAndRecommend, RecTest
-from recipes import SubmitRecipe
+from recipes import SubmitRecipe, RecipeWhitelist
 from recipe_review import RecipeReview, EnableRecipe, DeleteRecipe
 from recommendations import Recommendations
 from template import template
@@ -38,5 +38,6 @@ app = webapp2.WSGIApplication([
     ('/rec_test', RecTest),
     ('/enable_recipe', EnableRecipe),
     ('/delete_recipe', DeleteRecipe),
+    ('/whitelist', RecipeWhitelist),
     ('/spicex', SpiceXHandler)
 ], debug=True)

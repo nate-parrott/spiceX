@@ -33,3 +33,22 @@ class Recipe(ndb.Model):
             "sweetness": self.sweetness,
             "led_pins": led_pins
         }
+
+class Whitelist(ndb.Model):
+    foods = ndb.StringProperty(repeated=True)
+    
+    @staticmethod
+    def get():
+        return Whitelist.get_obj().foods
+    
+    @staticmethod
+    def set(foods):
+        obj = Whitelist.get_obj()
+        obj.foods = foods
+        obj.put()
+    
+    @staticmethod
+    def get_obj():
+        for obj in Whitelist.query():
+            return obj
+        return Whitelist(foods=[])
