@@ -108,7 +108,7 @@ def recognize_hybrid(data):
     if is_food:
         return {"foods": google_foods + clarifai_foods}
     else:
-        return {"foods": []}
+        return {"foods": [], "ignored_because_google_doesnt_think_this_is_food": {"google": google_foods, "clarifai": clarifai_foods}}
 
 class Recognize(webapp2.RequestHandler):
     def post(self):
