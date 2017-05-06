@@ -43,7 +43,7 @@ form p {
   top: 3px;
 }
 
-input[type=text], textarea {
+input[type=text], textarea, input[type=number] {
   appearance: none;
   outline: none;
   font-size: 1em;
@@ -55,6 +55,13 @@ input[type=text], textarea {
 /*  border: 0px solid black;
   border-bottom: 2px solid gray;
   background-color: transparent;*/
+}
+
+input[type=number] {
+  width: 50px;
+  margin-left: 10px;
+  padding: .5em;
+  text-align: center;
 }
 
 #ingredients ul {

@@ -68,7 +68,14 @@ function gotFood(food) {
       $('<div></div>').addClass('fake-image').appendTo($li); // TODO: add in real spice images
       let $ingredientInfo = $('<div></div>').addClass('ingredient-info').appendTo($li);
       $ingredientInfo.append($('<strong></strong>').addClass('ingredient-name').text(ingredient.ingredient));
-      $ingredientInfo.append($('<span></span>').addClass('ingredient-amount').text(ingredient.amount));
+
+      let amount = ingredient.amount;
+      // Add shake(s) on for future, but check for previous version
+      console.log(ingredient.ingredient + " " + amount);
+      if (!isNaN(amount)) {
+        amount += " " + ((parseInt(amount) > 1) ? "shakes" : "shake");
+      }
+      $ingredientInfo.append($('<span></span>').addClass('ingredient-amount').text(amount));
       return $li
     });
     if (recipe.extra_instructions) {

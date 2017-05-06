@@ -59,7 +59,8 @@
           </div>
           <div class='amount'>
             <label>Amount:</label>
-            <input name='{{ ingredient.id }}_ingredient_amount' placeholder='Two shakes' type='text'/>
+            <input name='{{ ingredient.id }}_ingredient_amount' min='1' max='100' value='1' type='number'/> 
+            <label>shake(s)</label>
           </div>
         </li>
       {% endfor %}
