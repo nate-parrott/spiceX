@@ -23,11 +23,12 @@ function getImageData(url, callback) {
 function imagesAreDifferent(im1, im2) {
   if (im1.data.length === im2.data.length) {
     let diff = 0;
+    let skip = 3;
     let len = im1.data.length;
-    for (let i=0; i<len; i++) {
+    for (let i=0; i<len; i += skip) {
       diff += Math.abs(im1.data[i] - im2.data[i]);
     }
-    let averageDiff = (diff / 255) / len;
+    let averageDiff = (diff / 255) / (len / skip);
     lastDiff = averageDiff;
     return averageDiff > imageDiffThreshold;
   } else {
