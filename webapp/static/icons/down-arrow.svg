@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="13px" height="18px" viewBox="0 0 13 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+    <title>down-arrow</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Main-Gradient2-SansSerifHead" transform="translate(-551.000000, -432.000000)" fill="#4D4D4D">
+            <path d="M563.144682,443.804832 C563.391772,443.565836 563.391772,443.167841 563.144682,442.920845 C562.906595,442.681848 562.50845,442.681848 562.270363,442.920845 L557.788728,447.400781 L557.788728,432.617991 C557.788728,432.273996 557.513627,432 557.169502,432 C556.825376,432 556.541272,432.273996 556.541272,432.617991 L556.541272,447.400781 L552.06964,442.920845 C551.82255,442.681848 551.423405,442.681848 551.185318,442.920845 C550.938227,443.167841 550.938227,443.566835 551.185318,443.804832 L556.72734,449.344753 C556.966427,449.59175 557.364573,449.59175 557.60266,449.344753 L563.144682,443.804832 Z" id="down-arrow"></path>
+        </g>
+    </g>
+</svg>

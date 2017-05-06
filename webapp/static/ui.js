@@ -1,6 +1,5 @@
 
 function gotFood(food) {
-  console.log(food)
   food = food || {recommendations: [], food_scores: []};
   
   let $main = $('#main').empty();
@@ -35,9 +34,27 @@ function gotFood(food) {
     // Make recipes a swipe carousel
     $recipes.itemslide();
     $recipes.on('changeActiveIndex', function(e) {
+      // Hide other arrows and make sure the current one has default opacity
+      $('.recipe-arrow').hide();
+      $('.recipe-arrow').css({'opacity': '1'});
+
       let recipe = recipesByFood[foodName][$recipes.getActiveIndex()];
       selectedRecipe(recipe);
+
+      // Only shows the down arrows on recipes that are long enough
+      // Kind of a shitty workaround, but good enough for now
+      let $recipeHeightThreshold = 420;
+      if ($('.itemslide-active .recipe')[0].scrollHeight > $recipeHeightThreshold) {
+        $('.itemslide-active .recipe-arrow').show();
+      }
     });
+
+    // If tapped, 
+    $('.recipe-arrow').click(function(e) {
+        $(e.target.parentNode).animate({
+          scrollTop: 350
+        }, 320);
+      });
     
     if (recipesByFood[foodName].length) {
       let initialRecipe = recipesByFood[foodName];
@@ -69,9 +86,8 @@ function gotFood(food) {
       let $ingredientInfo = $('<div></div>').addClass('ingredient-info').appendTo($li);
       $ingredientInfo.append($('<strong></strong>').addClass('ingredient-name').text(ingredient.ingredient));
 
-      let amount = ingredient.amount;
       // Add shake(s) on for future, but check for previous version
-      console.log(ingredient.ingredient + " " + amount);
+      let amount = ingredient.amount;
       if (!isNaN(amount)) {
         amount += " " + ((parseInt(amount) > 1) ? "shakes" : "shake");
       }
@@ -81,6 +97,9 @@ function gotFood(food) {
     if (recipe.extra_instructions) {
       $('<p></p>').addClass('extra').text(recipe.extra_instructions).appendTo($recipe);
     }
+
+    // add down-arrow
+    $card.append($('<div></div>').addClass('recipe-arrow'));
 
     return $card;
   }
@@ -126,3 +145,19 @@ var fullscreenShortcut = {
     }
   }
 }
+
+var recipeArrowScrollStyler = function() {
+  let $scrolltop = $('.recipe-container.itemslide-active').scrollTop();
+  let threshold = 10;
+  if($scrolltop > threshold){
+    $('.itemslide-active .recipe-arrow').css('opacity', (1 - (($scrolltop-threshold)/150)));
+  } else {
+    $('.itemslide-active .recipe-arrow').css('opacity', '1');
+  }
+}
+
+document.addEventListener('scroll', recipeArrowScrollStyler, true);
+
+
+
+

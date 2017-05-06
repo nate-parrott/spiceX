@@ -119,6 +119,19 @@ html, body, #main {
   transform-style: preserve-3d;
 }
 
+.recipe-arrow {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  height: 18px;
+  width: 13px;
+  background: url('icons/down-arrow.svg');
+  background-size: 13px 18px;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 30px;
+}
+
 .recipe-container {
   float: left;
   width: 380px;
@@ -148,6 +161,8 @@ html, body, #main {
   opacity: .6;
   transition: max-height .3s, opacity .2s;
 }
+
+
 
 .recipe-container.itemslide-active .recipe {
   opacity: 1;
@@ -201,7 +216,7 @@ h1 {
   position: relative;
   width: 18px;
   height: 18px;
-  background: url('icons/chili-pepper.svg');
+  
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -209,10 +224,11 @@ h1 {
 }
 
 .spiciness .spicy {
-  opacity: 1;
+  background: url('icons/chili-pepper-filled.svg');
 }
 
 .spiciness .unspicy {
+  background: url('icons/chili-pepper.svg');
   opacity: .3;
 }
 
