@@ -28,7 +28,7 @@ function gotFood(food) {
     });
 
     let selectedRecipe = (recipe) => {
-      //setLeds(recipe.led_pins); // Currently removed because it was throwing errors and messing with my sliding! >:( 
+      setLeds(recipe.led_pins || []);
     };
 
     // Make recipes a swipe carousel
