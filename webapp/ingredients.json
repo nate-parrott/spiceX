@@ -10,5 +10,83 @@
     "name": "Chili Powder",
     "pin": 2,
     "pic": "chili.png"
+  },
+  {
+    "id": "oregano",
+    "name": "Oregano",
+    "pin": 3,
+    "pic": "oregano.png"
+  },
+  {
+    "id": "ginger",
+    "name": "Ginger",
+    "pin": 4,
+    "pic": "ginger.png"
+  },
+  {
+    "id": "cinnamon",
+    "name": "Cinnamon",
+    "pin": 5,
+    "pic": "chili.png"
+  },
+  {
+    "id": "turmeric",
+    "name": "Turmeric",
+    "pin": 6,
+    "pic": "turmeric.png"
+  },
+  {
+    "id": "chipotle",
+    "name": "Ground Chipotle",
+    "pin": 7,
+    "pic": "chipotle.png"
+  },
+  {
+    "id": "nutmeg",
+    "name": "Nutmeg",
+    "pin": 8,
+    "pic": "nutmeg.png"
+  },
+  {
+    "id": "garlic",
+    "name": "Garlic Powder",
+    "pin": 9,
+    "pic": "garlic.png"
+  },
+  {
+    "id": "paprika",
+    "name": "Smoked Paprika",
+    "pin": 10,
+    "pic": "paprika.png"
+  },
+  {
+    "id": "onion",
+    "name": "Onion Powder",
+    "pin": 11,
+    "pic": "onion.png"
+  },
+  {
+    "id": "cloves",
+    "name": "Ground Cloves",
+    "pin": 12,
+    "pic": "cloves.png"
+  },
+  {
+    "id": "cayenne",
+    "name": "Cayenne Pepper",
+    "pin": 13,
+    "pic": "chili.png"
+  },
+  {
+    "id": "pepper",
+    "name": "Black Pepper",
+    "pin": 14,
+    "pic": "pepper.png"
+  },
+  {
+    "id": "salt",
+    "name": "Salt",
+    "pin": 15,
+    "pic": "salt.png"
   }
 ]

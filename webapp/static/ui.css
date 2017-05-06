@@ -5,6 +5,7 @@
 
 body {
   background-color: #333;
+  text-align: center;
 }
 
 html, body, #main {
@@ -14,23 +15,12 @@ html, body, #main {
   overflow: hidden;
 }
 
-/* This was having errors and we can just test on device anyway */
-/*@media screen and (min-width: 1000px) {
-  #main {
-    width: 800px;
-    height: 480px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-left: -400px;
-    margin-top: -240px;
-    box-shadow: 0px 2px 5px rgba(0,0,0,0.5);
-  }
-}*/
-
 #main {
-  display: flex;
-  flex-direction: column;
+  /*display: flex;
+  flex-direction: column;*/
+  height: 480px;
+  width: 800px;
+  margin: 0 auto;
   background: #FFBA92; /* For browsers that do not support gradients */
   background: -webkit-linear-gradient(left top, #FFBA92, #FAE6A5); /* For Safari 5.1 to 6.0 */
   background: -o-linear-gradient(bottom right, #FFBA92, #FAE6A5); /* For Opera 11.1 to 12.0 */
@@ -62,6 +52,7 @@ html, body, #main {
   position: relative;
   height: 100%;
   flex: 1;
+  text-align: left;
 }
 
 .food {
@@ -107,7 +98,7 @@ html, body, #main {
 
 .container {
   width: 100%;
-  flex: 1;
+  height: 420px;
 }
 
 .recipes {
@@ -131,10 +122,10 @@ html, body, #main {
 .recipe-container {
   float: left;
   width: 380px;
-  height: 100%;
+  height: 420px;
   overflow-y: scroll;
   margin-right: 20px;
-  padding-top: 20px;
+  padding: 20px 0;
 }
 
 .recipe {
@@ -144,9 +135,9 @@ html, body, #main {
   overflow: hidden;
 
   width: 100%;
-  height: 400px;
-  min-height: 400px;
-  max-height: 400px;
+  height: auto;
+  min-height: 380px;
+  max-height: 380px;
   margin: 0;
   padding: 16px;
   border-radius: 11px;
@@ -155,7 +146,7 @@ html, body, #main {
   -moz-border-radius: 11px;
   background-color: #ffffff;
   opacity: .6;
-  transition: max-height 2s, opacity .2s;
+  transition: max-height .3s, opacity .2s;
 }
 
 .recipe-container.itemslide-active .recipe {
