@@ -38,7 +38,9 @@ function gotFood(food) {
     $recipes.on('changeActiveIndex', function(e) {
       // Hide other arrows and make sure the current one has default opacity
       $('.recipe-arrow').hide();
-      $('.recipe-arrow').css({'opacity': '1'});
+      if ($('.recipe-container.itemslide-active').scrollTop() == 0) {
+        $('.recipe-arrow').css({'opacity': '1'});
+      }
 
       let recipe = recipesByFood[foodName][$recipes.getActiveIndex()];
       selectedRecipe(recipe);
