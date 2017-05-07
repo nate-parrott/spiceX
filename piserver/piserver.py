@@ -7,7 +7,8 @@ from urlparse import urlparse, parse_qs
 import time
 import threading
 import numpy as np
-from scipy.misc import imread
+from PIL import Image
+# from scipy.misc import imread
 
 zoom = 1
 for arg in sys.argv[1:]:
@@ -53,7 +54,9 @@ def compute_zoom_rect(zoom_scale):
     return ((1-w)/2, (1-w)/2, w, w)
 
 def img_data_to_numpy(data):
-    return imread(StringIO(data)).astype('float') / 255.0
+    # return imread(StringIO(data)).astype('float') / 255.0
+    pil_img = Image.open(StringIO(data))
+    return np.array(pil_img, dtype=np.uint8).astype('float') / 255.0
 
 IMAGE_DIFF_THRESHOLD = 0.01
 
