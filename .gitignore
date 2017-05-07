@@ -1,5 +1,6 @@
 # Secret keys
 webapp/secrets.json
+piserver/settings.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
