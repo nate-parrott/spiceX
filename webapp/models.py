@@ -30,6 +30,8 @@ class Recipe(ndb.Model):
             if ingredient_info:
                 if 'pic' in ingredient_info:
                     recipe_ingredient['pic_url'] = '/static/ingredient_images/' + ingredient_info['pic']
+                if 'icon' in ingredient_info:
+                    recipe_ingredient['icon_url'] = '/static/icons/spicecons/' + ingredient_info['icon']
                 if ingredient_info.get('pin') is not None:
                     led_pins.append(ingredient_info['pin'])
         

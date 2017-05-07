@@ -35,7 +35,7 @@ function gotFood(food) {
 
     // Make recipes a swipe carousel
     $recipes.itemslide();
-    $recipes.on('changeActiveIndex', function(e) {
+    $recipes.on('changePos', function(e) {
       // Hide other arrows and make sure the current one has default opacity
       $('.recipe-arrow').hide();
       $('.recipe-arrow').css({'opacity': '1'});
@@ -67,7 +67,8 @@ function gotFood(food) {
   let renderRecipe = (recipe) => {
     let $card = $('<li></li>').addClass('recipe-container');
     let $recipe = $('<div></div>').addClass('recipe').appendTo($card);
-    $('<div></div>').addClass('recipe-icon').appendTo($recipe); // TODO: add in real recipe icons
+    let $recipeIconContainer = $('<div></div>').addClass('recipe-icon-header').appendTo($recipe);
+    let $recipeIcon = $('<img/>').addClass('recipe-icon').appendTo($recipeIconContainer);
     $('<h1></h1>').text(recipe.title).appendTo($recipe);
 
     // add spiciness rating
@@ -79,23 +80,33 @@ function gotFood(food) {
     for (let i = 0; i < (5 - recipe.spicyness); i++) {
       $spiciness.append($('<div></div>').addClass('unspicy'));
     }
+
+    let maxAmount = 0;
+    let recipeIconURL = "";
     
     $('<p></p>').addClass('description').text(recipe.description).appendTo($recipe);
     let $ingredients = $('<ul></ul>').addClass('ingredients').appendTo($recipe);
     recipe.ingredients.forEach((ingredient) => {
       let $li = $('<li></li>').appendTo($ingredients);
-      $('<img/>').attr('src', ingredient.pic_url).appendTo($li); // TODO: add in real spice images
+      $('<img/>').attr('src', ingredient.pic_url).appendTo($li);
       let $ingredientInfo = $('<div></div>').addClass('ingredient-info').appendTo($li);
       $ingredientInfo.append($('<strong></strong>').addClass('ingredient-name').text(ingredient.ingredient));
 
       // Add shake(s) on for future, but check for previous version
       let amount = ingredient.amount;
       if (!isNaN(amount)) {
+        if (amount > maxAmount) {
+          maxAmount = parseInt(amount);
+          recipeIconURL = ingredient.icon_url;
+        }
         amount += " " + ((parseInt(amount) > 1) ? "shakes" : "shake");
       }
       $ingredientInfo.append($('<span></span>').addClass('ingredient-amount').text(amount));
       return $li
     });
+
+    $recipeIcon.attr('src', recipeIconURL);
+
     if (recipe.extra_instructions) {
       $('<p></p>').addClass('extra').text(recipe.extra_instructions).appendTo($recipe);
     }
@@ -150,6 +161,7 @@ var fullscreenShortcut = {
 
 var recipeArrowScrollStyler = function() {
   let $scrolltop = $('.recipe-container.itemslide-active').scrollTop();
+  console.log($scrolltop);
   let threshold = 10;
   if($scrolltop > threshold){
     $('.itemslide-active .recipe-arrow').css('opacity', (1 - (($scrolltop-threshold)/150)));
