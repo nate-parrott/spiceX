@@ -35,7 +35,7 @@ function gotFood(food) {
 
     // Make recipes a swipe carousel
     $recipes.itemslide();
-    $recipes.on('changePos', function(e) {
+    $recipes.on('changeActiveIndex', function(e) {
       // Hide other arrows and make sure the current one has default opacity
       $('.recipe-arrow').hide();
       $('.recipe-arrow').css({'opacity': '1'});
@@ -161,7 +161,7 @@ var fullscreenShortcut = {
 
 var recipeArrowScrollStyler = function() {
   let $scrolltop = $('.recipe-container.itemslide-active').scrollTop();
-  console.log($scrolltop);
+  
   let threshold = 10;
   if($scrolltop > threshold){
     $('.itemslide-active .recipe-arrow').css('opacity', (1 - (($scrolltop-threshold)/150)));
