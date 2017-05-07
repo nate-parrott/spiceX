@@ -134,7 +134,6 @@ class ImageFromCamera(Imager):
     def __init__(self):
         self.camera = picamera.PiCamera()
         self.apply_settings()
-        self.camera.zoom = compute_zoom_rect(zoom)
         # original res: 3280 x 2464
         # self.camera.resolution = (820, 616)
         self.camera.resolution = (597, 431)
@@ -144,6 +143,7 @@ class ImageFromCamera(Imager):
         self.camera.contrast = settings['contrast']
         self.camera.saturation = settings['saturation']
         self.camera.exposure_mode = exposure_mode_names[settings['exposure_mode']]
+        self.camera.zoom = compute_zoom_rect(settings['zoom'])
     
     def get_image(self):
         t = time.time()
