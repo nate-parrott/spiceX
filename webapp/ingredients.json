@@ -3,90 +3,105 @@
     "id": "cumin",
     "name": "Cumin",
     "pin": 1,
-    "pic": "cumin.png"
+    "pic": "cumin.png",
+    "icon": "cumin.svg"
   },
   {
     "id": "chili",
     "name": "Chili Powder",
     "pin": 2,
-    "pic": "chili.png"
+    "pic": "chili.png",
+    "icon": "chili.svg"
   },
   {
     "id": "oregano",
     "name": "Oregano",
     "pin": 3,
-    "pic": "oregano.png"
+    "pic": "oregano.png",
+    "icon": "oregano.svg"
   },
   {
     "id": "ginger",
     "name": "Ginger",
     "pin": 4,
-    "pic": "ginger.png"
+    "pic": "ginger.png",
+    "icon": "ginger.svg"
   },
   {
     "id": "cinnamon",
     "name": "Cinnamon",
     "pin": 5,
-    "pic": "chili.png"
+    "pic": "cinnamon.png",
+    "icon": "cinnamon.svg"
   },
   {
     "id": "turmeric",
     "name": "Turmeric",
     "pin": 6,
-    "pic": "turmeric.png"
+    "pic": "turmeric.png",
+    "icon": "turmeric.svg"
   },
   {
     "id": "chipotle",
     "name": "Ground Chipotle",
     "pin": 7,
-    "pic": "chipotle.png"
+    "pic": "chipotle.png",
+    "icon": "chili.svg"
   },
   {
     "id": "nutmeg",
     "name": "Nutmeg",
     "pin": 8,
-    "pic": "nutmeg.png"
+    "pic": "nutmeg.png",
+    "icon": "nutmeg.svg"
   },
   {
     "id": "garlic",
     "name": "Garlic Powder",
     "pin": 9,
-    "pic": "garlic.png"
+    "pic": "garlic.png",
+    "icon": "garlic.svg"
   },
   {
     "id": "paprika",
     "name": "Smoked Paprika",
     "pin": 10,
-    "pic": "paprika.png"
+    "pic": "paprika.png",
+    "icon": "chili.svg"
   },
   {
     "id": "onion",
     "name": "Onion Powder",
     "pin": 11,
-    "pic": "onion.png"
+    "pic": "onion.png",
+    "icon": "onion.svg"
   },
   {
     "id": "cloves",
     "name": "Ground Cloves",
     "pin": 12,
-    "pic": "cloves.png"
+    "pic": "cloves.png",
+    "icon": "cloves.svg"
   },
   {
     "id": "cayenne",
     "name": "Cayenne Pepper",
     "pin": 13,
-    "pic": "chili.png"
+    "pic": "cayenne.png",
+    "icon": "chili.svg"
   },
   {
     "id": "pepper",
     "name": "Black Pepper",
     "pin": 14,
-    "pic": "pepper.png"
+    "pic": "pepper.png",
+    "icon": "pepper.svg"
   },
   {
     "id": "salt",
     "name": "Salt",
     "pin": 15,
-    "pic": "salt.png"
+    "pic": "salt.png",
+    "icon": "pepper.svg"
   }
 ]

@@ -25,13 +25,16 @@ html, body, #main {
   height: 480px;
   width: 800px;
   margin: 0 auto;
+  font-family: 'Apercu';
+  font-size: 20px;
+}
+
+.gradient-bg {
   background: #FFBA92; /* For browsers that do not support gradients */
   background: -webkit-linear-gradient(left top, #FFBA92, #FAE6A5); /* For Safari 5.1 to 6.0 */
   background: -o-linear-gradient(bottom right, #FFBA92, #FAE6A5); /* For Opera 11.1 to 12.0 */
   background: -moz-linear-gradient(bottom right, #FFBA92, #FAE6A5); /* For Firefox 3.6 to 15 */
   background: linear-gradient(to bottom right, #FFBA92, #FAE6A5); /* Standard syntax */
-  font-family: 'Apercu';
-  font-size: 20px;
 }
 
 .header {
@@ -111,7 +114,7 @@ html, body, #main {
   -ms-user-select: none;
   user-select: none;
 
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   height:100%;
 
@@ -156,7 +159,7 @@ html, body, #main {
   min-height: 380px;
   max-height: 380px;
   margin: 0;
-  padding: 16px;
+  padding: 16px 24px;
   border-radius: 11px;
   -webkit-border-radius: 11px;
   -o-border-radius: 11px;
@@ -167,20 +170,29 @@ html, body, #main {
 }
 
 
-
 .recipe-container.itemslide-active .recipe {
   opacity: 1;
-  max-height: 1000px;
+  max-height: 1000000px;
   height: auto;
+}
+
+.recipe-icon-header {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  border-radius: 64px;
+  margin: 0 auto;
+  /*padding: 12px;*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .recipe-icon {
   position: relative;
   width: 64px;
   height: 64px;
-  background-color: #eee;
   margin: 0 auto;
-  border-radius: 64px;
 }
 
 h1, .description, .spiciness {
@@ -199,7 +211,7 @@ h1 {
 .description {
   font-size: .8em;
   font-style: italic;
-  margin: 16px 0;
+  margin: 16px 32px;
 }
 
 .spiciness {
