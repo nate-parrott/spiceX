@@ -100,9 +100,11 @@ class Imager(object):
                 if is_different:
                     # make a capture:
                     capture_idx += 1
-                    print 'Got capture', capture_idx
+                    print 'MOTION! making a capture haha', capture_idx
                     self.last_capture = (capture_idx, frame_data)
                     last_capture_np = frame_np
+            else:
+                print ' there is too much motion i am gonna wait for another frame!'
             last_frame_np = frame_np
             time.sleep(0.1)
     
