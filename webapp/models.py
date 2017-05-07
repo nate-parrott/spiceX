@@ -1,4 +1,6 @@
 from google.appengine.ext import ndb
+from ingredients import ingredients, ingredients_by_id
+from copy import deepcopy
 
 class Recipe(ndb.Model):
     added = ndb.DateTimeProperty(auto_now_add=True)
@@ -19,15 +21,22 @@ class Recipe(ndb.Model):
     enabled = ndb.BooleanProperty(default=False)
     
     def json(self):
-        from recipes import ingredients
+        recipe_ingredients = deepcopy(self.ingredients)
+        led_pins = []
         
-        ingredient_ids = set([i['ingredient'] for i in self.ingredients])
-        led_pins = [i['pin'] for i in ingredients if i['id'] in ingredient_ids and i.get('pin') is not None]
+        for recipe_ingredient in recipe_ingredients:
+            id = recipe_ingredient['ingredient']
+            ingredient_info = ingredients_by_id.get(id)
+            if ingredient_info:
+                if 'pic' in ingredient_info:
+                    recipe_ingredient['pic_url'] = '/static/ingredient_images/' + ingredient_info['pic']
+                if ingredient_info.get('pin') is not None:
+                    led_pins.append(ingredient_info['pin'])
         
         return {
             "title": self.title,
             "description": self.description,
-            "ingredients": self.ingredients,
+            "ingredients": recipe_ingredients,
             "extra_instructions": self.extra_instructions,
             "spicyness": self.spicyness,
             "sweetness": self.sweetness,

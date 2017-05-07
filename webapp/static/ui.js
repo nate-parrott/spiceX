@@ -82,7 +82,7 @@ function gotFood(food) {
     let $ingredients = $('<ul></ul>').addClass('ingredients').appendTo($recipe);
     recipe.ingredients.forEach((ingredient) => {
       let $li = $('<li></li>').appendTo($ingredients);
-      $('<div></div>').addClass('fake-image').appendTo($li); // TODO: add in real spice images
+      $('<img/>').attr('src', ingredient.pic_url).appendTo($li); // TODO: add in real spice images
       let $ingredientInfo = $('<div></div>').addClass('ingredient-info').appendTo($li);
       $ingredientInfo.append($('<strong></strong>').addClass('ingredient-name').text(ingredient.ingredient));
 
@@ -159,5 +159,7 @@ var recipeArrowScrollStyler = function() {
 document.addEventListener('scroll', recipeArrowScrollStyler, true);
 
 
-
+if (location.search.indexOf('info') == -1) {
+  $(document.body).addClass('hide-cursor');
+}
 

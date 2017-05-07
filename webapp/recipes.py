@@ -3,8 +3,7 @@ import webapp2
 from template import template
 import json
 from models import Recipe, Whitelist
-
-ingredients = json.load(open('ingredients.json'))
+from ingredients import ingredients
 
 flavor_attributes = [
     {'name': 'spicyness', 'label': 'How spicy will this be?'},

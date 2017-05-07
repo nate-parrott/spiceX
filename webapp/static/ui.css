@@ -3,13 +3,13 @@
     background: transparent;  /* optional: just make scrollbar invisible */
 }
 
-* {
-  cursor: none !important;
-}
-
 body {
   background-color: #333;
   text-align: center;
+}
+
+body.hide-cursor * {
+  cursor: none !important;
 }
 
 html, body, #main {
@@ -257,13 +257,13 @@ h1 {
   align-items:         center;
 }
 
-.fake-image {
+.ingredients img {
   position: relative;
   width: 70px;
   height: 70px;
   background-color: #eee;
-  border-radius: 70px;
-  margin-right: 25px;
+/*  border-radius: 70px;
+*/  margin-right: 25px;
 }
 
 .ingredient-info {
