@@ -74,7 +74,9 @@ def compute_zoom_rect(zoom_scale):
 def img_data_to_numpy(data):
     # return imread(StringIO(data)).astype('float') / 255.0
     pil_img = Image.open(StringIO(data))
-    return np.array(pil_img, dtype=np.uint8).astype('float') / 255.0
+    pil_img = pil_img.resize((50, 50), PIL.Image.BILINEAR)
+    img_np = np.array(pil_img, dtype=np.uint8).astype('float') / 255.0
+    return img_np - img_np.mean()
 
 def image_diff(im1, im2):
     # pass in numpy images:
@@ -98,9 +100,9 @@ class Imager(object):
         while True:
             frame_data = self.get_image()
             frame_np = img_data_to_numpy(frame_data)
-            # if last_frame_np is not None:
-            #     diff = image_diff(frame_np, last_frame_np)
-            #     print diff
+            if last_frame_np is not None:
+                diff = image_diff(frame_np, last_frame_np)
+                print diff
             is_stable = last_frame_np is None or image_diff(frame_np, last_frame_np) < STABILITY_THRESHOLD
             if is_stable:
                 is_different = last_capture_np is None or image_diff(frame_np, last_capture_np) > IMAGE_DIFF_THRESHOLD
