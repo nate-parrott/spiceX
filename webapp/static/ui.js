@@ -28,7 +28,9 @@ function gotFood(food) {
     });
 
     let selectedRecipe = (recipe) => {
-      setLeds(recipe.led_pins || []);
+      if (recipe) {
+        setLeds(recipe.led_pins || []);
+      }
     };
 
     // Make recipes a swipe carousel
