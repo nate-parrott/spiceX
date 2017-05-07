@@ -19,10 +19,10 @@ settings_options = {
     "saturation": [-40, -25, -15, 0, 15, 25, 40],
     "contrast": [-35, -25, -15, -5, 0, 5, 15, 25, 35],
     "exposure_mode": [0, 1, 2],
-    "zoom": [1, 1, 1, 1.25, 1.5],
+    "zoom": [1, 1.25, 1.5],
     "thresholds": [0.125, 0.25, 0.5, 0.66, 1, 1.5, 2, 4, 8]
 }
-exposure_mode_names = ['off', 'auto', 'night']
+exposure_mode_names = ['backlight', 'auto', 'night']
 def get_middle(list):
     return list[len(list)/2]
 
@@ -30,7 +30,7 @@ if os.path.exists('settings.json'):
     settings = json.load(open('settings.json'))
 else:
     settings = {k: get_middle(v) for k, v in settings_options.iteritems()}
-
+    settings['zoom'] = 1
 
 def update_thresholds():
     global IMAGE_DIFF_THRESHOLD, STABILITY_THRESHOLD
