@@ -131,9 +131,9 @@ class ImageFromCamera(Imager):
         t = time.time()
         io = StringIO()
         self.camera.capture(io, format='jpeg', use_video_port=True)
-        print "took {} to capture".format(time.time() - t)
+        # print "took {} to capture".format(time.time() - t)
         val = io.getvalue()
-        print "took {} to get value".format(time.time() - t)
+        # print "took {} to get value".format(time.time() - t)
         return val
 
 def set_active_leds(leds):
