@@ -10,6 +10,9 @@ import numpy as np
 from PIL import Image
 # from scipy.misc import imread
 
+IMAGE_DIFF_THRESHOLD = 0.02
+STABILITY_THRESHOLD = 0.008
+
 zoom = 1
 for arg in sys.argv[1:]:
     if arg.startswith('--zoom='):
@@ -58,8 +61,6 @@ def img_data_to_numpy(data):
     pil_img = Image.open(StringIO(data))
     return np.array(pil_img, dtype=np.uint8).astype('float') / 255.0
 
-IMAGE_DIFF_THRESHOLD = 0.01
-
 def image_diff(im1, im2):
     # pass in numpy images:
     return np.abs(im1 - im2).mean()
@@ -79,7 +80,10 @@ class Imager(object):
         while True:
             frame_data = self.get_image()
             frame_np = img_data_to_numpy(frame_data)
-            is_stable = last_frame_np is None or image_diff(frame_np, last_frame_np) < IMAGE_DIFF_THRESHOLD
+            # if last_frame_np is not None:
+            #     diff = image_diff(frame_np, last_frame_np)
+            #     print diff
+            is_stable = last_frame_np is None or image_diff(frame_np, last_frame_np) < STABILITY_THRESHOLD
             if is_stable:
                 is_different = last_capture_np is None or image_diff(frame_np, last_capture_np) > IMAGE_DIFF_THRESHOLD
                 if is_different:
