@@ -19,10 +19,10 @@ settings_options = {
     "saturation": [-40, -25, -15, 0, 15, 25, 40],
     "contrast": [-35, -25, -15, -5, 0, 5, 15, 25, 35],
     "exposure_mode": [0, 1, 2],
-    "zoom": [1, 1, 1, 1.25, 1.5],
+    "zoom": [1, 1.25, 1.5],
     "thresholds": [0.125, 0.25, 0.5, 0.66, 1, 1.5, 2, 4, 8]
 }
-exposure_mode_names = ['off', 'auto', 'night']
+exposure_mode_names = ['backlight', 'auto', 'night']
 def get_middle(list):
     return list[len(list)/2]
 
@@ -30,7 +30,7 @@ if os.path.exists('settings.json'):
     settings = json.load(open('settings.json'))
 else:
     settings = {k: get_middle(v) for k, v in settings_options.iteritems()}
-
+    settings['zoom'] = 1
 
 def update_thresholds():
     global IMAGE_DIFF_THRESHOLD, STABILITY_THRESHOLD
@@ -74,7 +74,9 @@ def compute_zoom_rect(zoom_scale):
 def img_data_to_numpy(data):
     # return imread(StringIO(data)).astype('float') / 255.0
     pil_img = Image.open(StringIO(data))
-    return np.array(pil_img, dtype=np.uint8).astype('float') / 255.0
+    pil_img = pil_img.resize((50, 50), PIL.Image.BILINEAR)
+    img_np = np.array(pil_img, dtype=np.uint8).astype('float') / 255.0
+    return img_np - img_np.mean()
 
 def image_diff(im1, im2):
     # pass in numpy images:
@@ -98,9 +100,9 @@ class Imager(object):
         while True:
             frame_data = self.get_image()
             frame_np = img_data_to_numpy(frame_data)
-            # if last_frame_np is not None:
-            #     diff = image_diff(frame_np, last_frame_np)
-            #     print diff
+            if last_frame_np is not None:
+                diff = image_diff(frame_np, last_frame_np)
+                print diff
             is_stable = last_frame_np is None or image_diff(frame_np, last_frame_np) < STABILITY_THRESHOLD
             if is_stable:
                 is_different = last_capture_np is None or image_diff(frame_np, last_capture_np) > IMAGE_DIFF_THRESHOLD

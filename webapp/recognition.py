@@ -96,7 +96,7 @@ def recognize_google_async(data):
     return future
     
 def recognize_hybrid(data):
-    food_words = ['food' ,'meal', 'drink']
+    food_words = ['food' ,'meal', 'drink', 'produce']
     
     google_future = recognize_google_async(data)
     clarifai_future = recognize_clarifai_async(data)
