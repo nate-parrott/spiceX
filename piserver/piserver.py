@@ -8,16 +8,34 @@ import time
 import threading
 import numpy as np
 from PIL import Image
+import json
 # from scipy.misc import imread
 
 IMAGE_DIFF_THRESHOLD = 0.02
 STABILITY_THRESHOLD = 0.008
 
-zoom = 1
-for arg in sys.argv[1:]:
-    if arg.startswith('--zoom='):
-        zoom = float(arg.split('--zoom=')[1])
-        print 'Zoom:', zoom
+settings_options = {
+    "brightness": [15, 25, 35, 50, 65, 75, 85],
+    "saturation": [-40, -25, -15, 0, 15, 25, 40],
+    "contrast": [-35, -25, -15, -5, 0, 5, 15, 25, 35],
+    "exposure_mode": [0, 1, 2],
+    "zoom": [1, 1, 1, 1.25, 1.5],
+    "thresholds": [0.125, 0.25, 0.5, 0.66, 1, 1.5, 2, 4, 8]
+}
+exposure_mode_names = ['off', 'auto', 'night']
+def get_middle(list):
+    return list[len(list)/2]
+
+if os.path.exists('settings.json'):
+    settings = json.load(open('settings.json'))
+else:
+    settings = {k: get_middle(v) for k, v in settings_options.iteritems()}
+
+
+def update_thresholds():
+    global IMAGE_DIFF_THRESHOLD, STABILITY_THRESHOLD
+    IMAGE_DIFF_THRESHOLD = 0.02 * settings['thresholds']
+    STABILITY_THRESHOLD = 0.008 * settings['thresholds']
 
 try:
     # from shiftpi.shiftpi import HIGH, LOW, ALL, digitalWrite, delay, shiftRegisters
@@ -47,9 +65,6 @@ python camera_server.py camera
  ~or~
 python camera_server.py <path to jpeg>
  (for testing purposes)
-
-optional argument:
---zoom=2 zooms in
 """
 
 def compute_zoom_rect(zoom_scale):
@@ -72,6 +87,9 @@ class Imager(object):
         thread.daemon = True
         thread.start()
     
+    def apply_settings(self):
+        update_thresholds()
+    
     def run(self):
         # called on background thread:
         last_capture_np = None
@@ -89,9 +107,11 @@ class Imager(object):
                 if is_different:
                     # make a capture:
                     capture_idx += 1
-                    print 'Got capture', capture_idx
+                    print 'MOTION! making a capture haha', capture_idx
                     self.last_capture = (capture_idx, frame_data)
                     last_capture_np = frame_np
+            else:
+                print ' there is too much motion i am gonna wait for another frame!'
             last_frame_np = frame_np
             time.sleep(0.1)
     
@@ -122,14 +142,18 @@ class ImageFromFile(Imager):
 class ImageFromCamera(Imager):
     def __init__(self):
         self.camera = picamera.PiCamera()
-        self.camera.zoom = compute_zoom_rect(zoom)
+        self.apply_settings()
         # original res: 3280 x 2464
         # self.camera.resolution = (820, 616)
         self.camera.resolution = (597, 431)
-        self.camera.brightness = 75
-        self.camera.contrast = 30
-        self.camera.saturation = 25
-        self.camera.exposure_mode = 'night'
+    
+    def apply_settings(self):
+        update_thresholds()
+        self.camera.brightness = settings['brightness']
+        self.camera.contrast = settings['contrast']
+        self.camera.saturation = settings['saturation']
+        self.camera.exposure_mode = exposure_mode_names[settings['exposure_mode']]
+        self.camera.zoom = compute_zoom_rect(settings['zoom'])
     
     def get_image(self):
         t = time.time()
@@ -147,6 +171,13 @@ def set_active_leds(leds):
             GPIO.output(pin, (idx in leds))
     else:
         print ' (LEDs not available, so not doing anything real)'
+
+def set_setting(k, v):
+    if v in settings_options[k]:
+        settings[k] = v
+    with open('settings.json', 'w') as f:
+        f.write(json.dumps(settings))
+    imager.apply_settings()
 
 class Handler(BaseHTTPRequestHandler):
     def split_query(self):
@@ -180,6 +211,10 @@ class Handler(BaseHTTPRequestHandler):
                 self.respond(status=204)
         elif self.endpoint() == '/':
             self.respond(data='Try /camera')
+        elif self.endpoint() == '/settings':
+            self.respond(data=open('settings.html').read(), content_type='text/html')
+        elif self.endpoint() == '/get_settings':
+            self.respond(data=json.dumps(settings), content_type='application/json')
         elif self.endpoint() == '/led_test':
             self.respond(data=open('led_test.html').read(), content_type='text/html')
         else:
@@ -190,6 +225,14 @@ class Handler(BaseHTTPRequestHandler):
             pins = map(int, self.params().get('pins', '').split(','))
             set_active_leds(pins)
             self.respond(status=200, data='ok')
+        elif self.endpoint() in '/set_setting':
+            k = self.params().get('key')
+            diff = 1 if self.params().get('direction') == 'up' else -1
+            options = settings_options[k]
+            idx = options.index(settings[k]) + diff
+            value = options[idx % len(options)]
+            set_setting(k, value)
+            self.respond(data=json.dumps(settings), content_type='application/json')
         else:
             self.respond(status=404, data='Unknown path')
     
