@@ -6,6 +6,7 @@ function gotFood(food) {
   let $header = $('<div></div>').addClass('header').appendTo($main);
   $header.append($('<div></div>').addClass('eating-label').text("I'm eating..."));
   let $nav = $('<div></div>').addClass('nav').appendTo($header);
+  let $navFoods = $('<div></div>').addClass('nav-foods').appendTo($nav);
   let $container = $('<div></div>').addClass('container').appendTo($main);
   let $recipes = $('<ul></ul>').addClass('recipes').appendTo($container);
   
@@ -19,9 +20,9 @@ function gotFood(food) {
   let recipesByFood = {};
   
   let selectFood = (foodName) => {
-    $nav.children().removeClass('selected');
+    $navFoods.children().removeClass('selected');
     let idx = foodNames.indexOf(foodName);
-    $($nav.children().get(idx)).addClass('selected');
+    $($navFoods.children().get(idx)).addClass('selected');
     $recipes.empty();
     recipesByFood[foodName].map((recipe) => {
       $recipes.append(renderRecipe(recipe));
@@ -127,7 +128,7 @@ function gotFood(food) {
       
       let label = $('<div></div>').addClass('food').text(foodName).click(() => {
         selectFood(foodName);
-      }).appendTo($nav);
+      }).appendTo($navFoods);
     }
   });
 

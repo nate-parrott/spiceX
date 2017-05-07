@@ -52,22 +52,33 @@ html, body, #main {
 
 .eating-label {
   margin-left: 20px;
-  margin-right: 35px;
+  margin-right: 20px;
 }
 
 .nav {
   position: relative;
   height: 100%;
-  flex: 1;
+  width: 700px;
   text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+}
+
+.nav-foods {
+  position: relative;
+  text-align: left;
+  flex: 1;
+  overflow-x: scroll;
 }
 
 .food {
   opacity: 1;
   display: inline-block;
   box-sizing: border-box;
-  padding: 18px 0 12px 0;
-  margin: 0 20px;
+  padding: 20px 0 14px 0;
+  margin: 10px 14px 0 14px;
   text-transform: uppercase;
   transition: opacity .15s;
   width: 100px;
@@ -77,9 +88,7 @@ html, body, #main {
 
 .help {
   padding: 0 16px;
-  position: absolute;
-  right: 0;
-  top: 0;
+  position: relative;
   width: 24px;
   height: 60px;
   background: url('icons/help.svg');
