@@ -5,6 +5,9 @@ import sys, os
 from StringIO import StringIO
 from urlparse import urlparse, parse_qs
 import time
+import threading
+import numpy as np
+from scipy.misc import imread
 
 zoom = 1
 for arg in sys.argv[1:]:
@@ -49,9 +52,53 @@ def compute_zoom_rect(zoom_scale):
     w = 1.0 / zoom_scale
     return ((1-w)/2, (1-w)/2, w, w)
 
+def img_data_to_numpy(data):
+    return imread(StringIO(data)).astype('float') / 255.0
+
+IMAGE_DIFF_THRESHOLD = 0.01
+
+def image_diff(im1, im2):
+    # pass in numpy images:
+    return np.abs(im1 - im2).mean()
+
+class Imager(object):
+    def start(self):
+        self.last_capture = None # (index, image data)
+        thread = threading.Thread(target=self.run, args=[])
+        thread.daemon = True
+        thread.start()
+    
+    def run(self):
+        # called on background thread:
+        last_capture_np = None
+        last_frame_np = None
+        capture_idx = 0
+        while True:
+            frame_data = self.get_image()
+            frame_np = img_data_to_numpy(frame_data)
+            is_stable = last_frame_np is None or image_diff(frame_np, last_frame_np) < IMAGE_DIFF_THRESHOLD
+            if is_stable:
+                is_different = last_capture_np is None or image_diff(frame_np, last_capture_np) > IMAGE_DIFF_THRESHOLD
+                if is_different:
+                    # make a capture:
+                    capture_idx += 1
+                    print 'Got capture', capture_idx
+                    self.last_capture = (capture_idx, frame_data)
+                    last_capture_np = frame_np
+            last_frame_np = frame_np
+            time.sleep(0.1)
+    
+    def get_new_image(self, prev_index):
+        # call from main thread
+        if self.last_capture:
+            index, img = self.last_capture
+            if index > prev_index:
+                return index, img
+        return None
+
 # these classes both provide an image -- one is a fake image from a file (for debugging), and one is a real image from the pi's camera
 
-class ImageFromFile(object):
+class ImageFromFile(Imager):
     def __init__(self, path):
         self.path = path
         self.img = None
@@ -65,7 +112,7 @@ class ImageFromFile(object):
         return self.img
             
 
-class ImageFromCamera(object):
+class ImageFromCamera(Imager):
     def __init__(self):
         self.camera = picamera.PiCamera()
         self.camera.zoom = compute_zoom_rect(zoom)
@@ -115,6 +162,14 @@ class Handler(BaseHTTPRequestHandler):
         print self.endpoint(), self.params()
         if self.endpoint() == '/camera':
             self.respond(data=imager.get_image(), content_type='image/jpeg')
+        elif self.endpoint() == '/newcamera':
+            last_idx = int(self.params().get('last_idx', '0'))
+            resp = imager.get_new_image(last_idx)
+            if resp:
+                idx, img = resp
+                self.respond(data=img, content_type='image/jpeg', extra_headers={'X-Index': str(idx)})
+            else:
+                self.respond(status=204)
         elif self.endpoint() == '/':
             self.respond(data='Try /camera')
         elif self.endpoint() == '/led_test':
@@ -130,7 +185,7 @@ class Handler(BaseHTTPRequestHandler):
         else:
             self.respond(status=404, data='Unknown path')
     
-    def respond(self, status=200, data='', content_type='text/plain'):
+    def respond(self, status=200, data='', content_type='text/plain', extra_headers={}):
         self.send_response(200)
         headers = {
             "Cache-Control": "no-cache, no-store, must-revalidate",
@@ -140,6 +195,8 @@ class Handler(BaseHTTPRequestHandler):
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "GET, OPTIONS, POST"
         }
+        for k, v in extra_headers.iteritems():
+            headers[k] = v
         for h, v in headers.iteritems():
             self.send_header(h, v)
         self.end_headers()
@@ -155,7 +212,8 @@ try:
         imager = ImageFromCamera()
     else:
         imager = ImageFromFile(arg)
-
+    imager.start()
+    
     PORT = 8999
     
     server = HTTPServer(('', PORT), Handler)
