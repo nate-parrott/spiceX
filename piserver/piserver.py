@@ -19,7 +19,8 @@ settings_options = {
     "saturation": [-40, -25, -15, 0, 15, 25, 40],
     "contrast": [-35, -25, -15, -5, 0, 5, 15, 25, 35],
     "exposure_mode": [0, 1, 2],
-    "zoom": [1, 1, 1, 1.25, 1.5]
+    "zoom": [1, 1, 1, 1.25, 1.5],
+    "thresholds": [0.125, 0.25, 0.5, 0.66, 1, 1.5, 2, 4, 8]
 }
 exposure_mode_names = ['off', 'auto', 'night']
 def get_middle(list):
@@ -29,6 +30,12 @@ if os.path.exists('settings.json'):
     settings = json.load(open('settings.json'))
 else:
     settings = {k: get_middle(v) for k, v in settings_options.iteritems()}
+
+
+def update_thresholds():
+    global IMAGE_DIFF_THRESHOLD, STABILITY_THRESHOLD
+    IMAGE_DIFF_THRESHOLD = 0.02 * settings['thresholds']
+    STABILITY_THRESHOLD = 0.008 * settings['thresholds']
 
 try:
     # from shiftpi.shiftpi import HIGH, LOW, ALL, digitalWrite, delay, shiftRegisters
@@ -81,7 +88,7 @@ class Imager(object):
         thread.start()
     
     def apply_settings(self):
-        pass
+        update_thresholds()
     
     def run(self):
         # called on background thread:
@@ -141,6 +148,7 @@ class ImageFromCamera(Imager):
         self.camera.resolution = (597, 431)
     
     def apply_settings(self):
+        update_thresholds()
         self.camera.brightness = settings['brightness']
         self.camera.contrast = settings['contrast']
         self.camera.saturation = settings['saturation']
