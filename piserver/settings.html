@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<body>
+  <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+  
+  <div id='img_container'></div>
+  
+  <div id='controls'>
+    
+  </div>
+  
+  <script>
+    $.get('/get_settings', (settings) => {
+      let variables = Object.keys(settings);
+      
+      let changeVar = (variable, isUp) => {
+        let url = '/set_setting?key=' + variable + '&direction=' + (isUp ? 'up' : 'down');
+        $.post(url, (st) => {
+          settings = st;
+          renderSettingsUI();
+        });
+      }
+      
+      let renderSettingsUI = () => {
+        let $controls = $('#controls').empty();
+        
+        variables.forEach((v) => {
+          let $div = $('<div></div>').append($('<label></label>').text(v + ": " + settings[v])).appendTo($controls);
+          $('<button>+</button>').click(() => {
+            changeVar(v, true);
+          }).appendTo($div);
+          $('<button>-</button>').click(() => {
+            changeVar(v, false);
+          }).appendTo($div);
+        })
+        
+        $('#img_container').empty().append($('<img />').attr('src', '/camera')); 
+      }
+      
+      renderSettingsUI();
+    })
+        
+  </script>
+</body>
