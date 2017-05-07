@@ -25,7 +25,7 @@ try:
     print 'LEDs available'
     leds_available = True
 except ImportError:
-    print 'LEDs unavailable -- install rpi-gpi'
+    print 'LEDs unavailable -- rpi-gpio couldnt be imported'
     leds_available = False
 
 # GPIO.output(7, True)
@@ -156,6 +156,7 @@ class Handler(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Access-Control-Allow-Methods', 'GET, OPTIONS, POST')
+        self.send_header('Access-Control-Expose-Headers', 'X-Index')
         self.end_headers()
     
     def do_GET(self):
@@ -186,14 +187,15 @@ class Handler(BaseHTTPRequestHandler):
             self.respond(status=404, data='Unknown path')
     
     def respond(self, status=200, data='', content_type='text/plain', extra_headers={}):
-        self.send_response(200)
+        self.send_response(status)
         headers = {
             "Cache-Control": "no-cache, no-store, must-revalidate",
             "Pragma": "no-cache",
             "Expires": "0",
             "Content-Type": content_type,
             "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET, OPTIONS, POST"
+            "Access-Control-Allow-Methods": "GET, OPTIONS, POST",
+            "Access-Control-Expose-Headers": "x-Index"
         }
         for k, v in extra_headers.iteritems():
             headers[k] = v
@@ -217,6 +219,7 @@ try:
     PORT = 8999
     
     server = HTTPServer(('', PORT), Handler)
+    server.timeout = 10
     print 'Started server on localhost:{}'.format(PORT)
     server.serve_forever()
 

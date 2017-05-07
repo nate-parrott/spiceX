@@ -80,6 +80,7 @@ def recognize_google_async(data):
     data_future = post_async(url, data=json.dumps(req), headers=headers)
     def future():
         resp = data_future()
+        print resp
         if resp is None:
             return None
         resp = json.loads(resp)
@@ -136,6 +137,20 @@ class RecognizeAndRecommend(webapp2.RequestHandler):
         recommendations = get_recommendations(foods)
         response = {"recommendations": recommendations, "food_scores": food_scores}
         self.response.write(json.dumps(response))
+
+class RecognizeAndRecommendBinary(webapp2.RequestHandler):
+    def post(self):
+        if self.request.get('debug_foods'):
+            foods = self.request.get('debug_foods').split('//')
+            food_scores = [[food, 1] for food in foods]
+        else:
+            food_scores = recognize_hybrid(self.request.body)['foods']
+            foods = [f[0] for f in food_scores]
+        print 'FOODS:', foods
+        recommendations = get_recommendations(foods)
+        response = {"recommendations": recommendations, "food_scores": food_scores}
+        self.response.write(json.dumps(response))
+
 
 class RecTest(webapp2.RequestHandler):
     def get(self):

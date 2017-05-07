@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import webapp2
-from recognition import Recognize, RecognizeBase64, RecognizeAndRecommend, RecTest
+from recognition import Recognize, RecognizeBase64, RecognizeAndRecommend, RecTest, RecognizeAndRecommendBinary
 from recipes import SubmitRecipe, RecipeWhitelist
 from recipe_review import RecipeReview, EnableRecipe, DeleteRecipe
 from recommendations import Recommendations
@@ -35,6 +35,7 @@ app = webapp2.WSGIApplication([
     ('/review', RecipeReview),
     ('/recommend', Recommendations),
     ('/recognize_and_recommend', RecognizeAndRecommend),
+    ('/recognize_and_recommend_binary', RecognizeAndRecommendBinary),
     ('/rec_test', RecTest),
     ('/enable_recipe', EnableRecipe),
     ('/delete_recipe', DeleteRecipe),
