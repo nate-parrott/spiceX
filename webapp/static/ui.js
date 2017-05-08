@@ -126,6 +126,8 @@ function gotFood(food) {
 
     // Make recipes a swipe carousel
     $recipes.itemslide();
+    $recipes.addSlide('');
+    $recipes.removeSlide($recipes[0].children.length-1);
     $recipes.on('changeActiveIndex', function(e) {
       // Hide other arrows and make sure the current one has default opacity
       $('.recipe-arrow').hide();
