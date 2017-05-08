@@ -7,12 +7,13 @@ from urlparse import urlparse, parse_qs
 import time
 import threading
 import numpy as np
+import PIL
 from PIL import Image
 import json
 # from scipy.misc import imread
 
 IMAGE_DIFF_THRESHOLD = 0.02
-STABILITY_THRESHOLD = 0.008
+STABILITY_THRESHOLD = IMAGE_DIFF_THRESHOLD / 2
 
 settings_options = {
     "brightness": [15, 25, 35, 50, 65, 75, 85],
@@ -35,7 +36,7 @@ else:
 def update_thresholds():
     global IMAGE_DIFF_THRESHOLD, STABILITY_THRESHOLD
     IMAGE_DIFF_THRESHOLD = 0.02 * settings['thresholds']
-    STABILITY_THRESHOLD = 0.008 * settings['thresholds']
+    STABILITY_THRESHOLD = IMAGE_DIFF_THRESHOLD / 2
 
 try:
     # from shiftpi.shiftpi import HIGH, LOW, ALL, digitalWrite, delay, shiftRegisters
@@ -100,8 +101,8 @@ class Imager(object):
         while True:
             frame_data = self.get_image()
             frame_np = img_data_to_numpy(frame_data)
-            if last_frame_np is not None:
-                diff = image_diff(frame_np, last_frame_np)
+            if last_capture_np is not None:
+                diff = image_diff(last_capture_np, frame_np)
                 print diff
             is_stable = last_frame_np is None or image_diff(frame_np, last_frame_np) < STABILITY_THRESHOLD
             if is_stable:
