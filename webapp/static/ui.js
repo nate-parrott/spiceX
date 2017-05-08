@@ -84,9 +84,15 @@ function noFood($main) {
   $emptyPageInfo.append($('<p></p>').text('Just put your plate on the circle below and find the right combination of toppings for you.'));
 }
 
+window.prevFoodNames = null;
 
 function gotFood(food) {
   food = food || {recommendations: [], food_scores: []};
+  let allFoodNames = food.recommendations.map((obj) => obj.food).join(' + ');
+  if (allFoodNames === window.prevFoodNames) {
+    return;
+  }
+  window.prevFoodNames = allFoodNames;
   
   let $main = $('#main').empty();
 
