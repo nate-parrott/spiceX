@@ -42,7 +42,7 @@ try:
     # from shiftpi.shiftpi import HIGH, LOW, ALL, digitalWrite, delay, shiftRegisters
     import RPi.GPIO as GPIO
     GPIO.setmode(GPIO.BOARD)
-    led_pins = [11, 13, 15, 29, 31, 33, 35, 37, 12, 16, 22, 32, 36, 38, 40]
+    led_pins = [37, 35, 33, 31, 29, 13, 11, 40, 38, 36, 32, 22, 16, 18, 12]
     for pin in led_pins:
         GPIO.setup(pin, GPIO.OUT)
     print 'LEDs available'
