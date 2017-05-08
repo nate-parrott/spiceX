@@ -228,7 +228,9 @@ class Handler(BaseHTTPRequestHandler):
     
     def do_POST(self):
         if self.endpoint() == '/leds':
-            pins = map(int, self.params().get('pins', '').split(','))
+            pins = []
+            if self.params().get('pins', '') != 'none':
+                pins = map(int, self.params().get('pins', '').split(','))
             set_active_leds(pins)
             self.respond(status=200, data='ok')
         elif self.endpoint() in '/set_setting':
