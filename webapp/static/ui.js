@@ -84,8 +84,15 @@ function noFood($main) {
   $emptyPageInfo.append($('<p></p>').text('Just put your plate on the circle below and find the right combination of toppings for you.'));
 }
 
+let _last_food = null;
 
 function gotFood(food) {
+  if (food === _last_food) {
+    return;
+  }
+
+  _last_food = food;
+
   food = food || {recommendations: [], food_scores: []};
   
   let $main = $('#main').empty();
