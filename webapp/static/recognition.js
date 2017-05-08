@@ -55,6 +55,7 @@ class FoodRecognizer {
     this.fetchCount++;
     recognizeImage(imageBuffer, (results) => {
       this.lastRec = results;
+      console.log("recognition.js: " + results);
       window.gotFood(results);
       callback();
     })
