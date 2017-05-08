@@ -22,7 +22,12 @@ function recognizeImage(imageBuffer, callback) {
   req.open("POST", '/recognize_and_recommend_binary', true);
   req.setRequestHeader("Content-Type", "image/jpeg");
   req.onload = (e) => {
-    callback(JSON.parse(req.responseText));
+    console.log(req.statusCode);
+    if (req.statusCode == 200) {
+      callback(JSON.parse(req.responseText));
+    } else {
+      callback(null);
+    }
   };
   req.send(imageBuffer);
 }
