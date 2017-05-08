@@ -93,6 +93,7 @@ class Imager(object):
         last_capture_np = None
         last_frame_np = None
         capture_idx = 0
+        was_stable_before = False
         while True:
             
             IMAGE_DIFF_THRESHOLD = 0.02 * settings['thresholds']
@@ -106,8 +107,9 @@ class Imager(object):
             is_stable = last_frame_np is None or image_diff(frame_np, last_frame_np) < STABILITY_THRESHOLD
             if is_stable:
                 print 'stable'
-                is_different = last_capture_np is None or image_diff(frame_np, last_capture_np) > IMAGE_DIFF_THRESHOLD
-                if is_different:
+                # is_different = last_capture_np is None or image_diff(frame_np, last_capture_np) > IMAGE_DIFF_THRESHOLD
+                # if is_different:
+                if not was_stable_before:
                     # make a capture:
                     capture_idx += 1
                     print 'MOTION! making a capture haha', capture_idx
@@ -115,6 +117,7 @@ class Imager(object):
                     last_capture_np = frame_np
             else:
                 print ' unstable'
+            was_stable_before = is_stable
             last_frame_np = frame_np
             time.sleep(0.1)
     
