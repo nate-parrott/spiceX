@@ -1,8 +1,98 @@
 
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function fourRandos(maxIndex, arrLength) {
+  let arr = [];
+  let i = 0;
+  while (i < arrLength) {
+    let num = getRandomInt(0, maxIndex);
+    if (arr.indexOf(num) == -1) {
+      arr.push(num);
+      i++;
+    }
+  }
+  return arr;
+}
+
+function setSpicecons(spices, $icons) {
+  let arr = fourRandos($icons.length-1, 13);
+  for (var i = 0; i < $icons.length; i++) {
+    if (arr.indexOf(i) != -1) {
+      $icons[i].removeClass('fade');
+    } else {
+      $icons[i].addClass('fade');
+    }
+  }
+}
+
+// sorry this is gross but i am tired
+function noFood($main) {
+  $('<h2></h2>').text('zest').appendTo($main);
+
+  let numCols = 6;
+  let numRows = 6;
+  let classes = ['even-row', 'odd-row'];
+  let spices = [
+    'cumin',
+    'oregano',
+    'ginger',
+    'cinnamon',
+    'turmeric',
+    'nutmeg',
+    'garlic',
+    'onion',
+    'cloves',
+    'pepper',
+    'chili'
+  ];
+  let $icons = [];
+  let suffix = '.svg';
+  let prefix = '/static/icons/spicecons/white/';
+  let $spicecons = $('<div></div>').addClass('spicecons').appendTo($main);
+  let currentSpiceInd = 0;
+  for (var i = 0; i < numRows; i++) {
+    let $row = $('<div></div>').addClass(classes[i%2]);
+    for (var j = 0; j < numCols; j++) {
+      let $icon = $('<img/>').addClass('icon').attr('src', prefix + spices[currentSpiceInd] + suffix).appendTo($row);
+      $icons.push($icon);
+      currentSpiceInd++;
+      if (currentSpiceInd == spices.length) {
+        currentSpiceInd = 0;
+      }
+    }
+    $spicecons.append($row);
+  }
+
+  setTimeout(function() {
+    setSpicecons(spices, $icons);
+  }, 10);
+  setInterval(
+    function() {
+      setSpicecons(spices, $icons);
+    },
+    3000
+  );
+
+  let $emptyPageInfo = $('<div></div>').addClass('empty-info').appendTo($main);
+  $emptyPageInfo.append($('<div></div>').addClass('header').text('food tasting bland?'));
+  $emptyPageInfo.append($('<p></p>').text('Just put your plate on the circle below and find the right combination of toppings for you.'));
+}
+
+
 function gotFood(food) {
   food = food || {recommendations: [], food_scores: []};
   
   let $main = $('#main').empty();
+
+  if (food.recommendations.length == 0) {
+    noFood($main);
+    return;
+  }
+
   let $header = $('<div></div>').addClass('header').appendTo($main);
   $header.append($('<div></div>').addClass('eating-label').text("I'm eating..."));
   let $nav = $('<div></div>').addClass('nav').appendTo($header);
