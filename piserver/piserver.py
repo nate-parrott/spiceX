@@ -33,11 +33,6 @@ else:
     settings = {k: get_middle(v) for k, v in settings_options.iteritems()}
     settings['zoom'] = 1
 
-def update_thresholds():
-    global IMAGE_DIFF_THRESHOLD, STABILITY_THRESHOLD
-    IMAGE_DIFF_THRESHOLD = 0.02 * settings['thresholds']
-    STABILITY_THRESHOLD = IMAGE_DIFF_THRESHOLD / 2
-
 try:
     # from shiftpi.shiftpi import HIGH, LOW, ALL, digitalWrite, delay, shiftRegisters
     import RPi.GPIO as GPIO
@@ -91,7 +86,7 @@ class Imager(object):
         thread.start()
     
     def apply_settings(self):
-        update_thresholds()
+        pass
     
     def run(self):
         # called on background thread:
@@ -99,13 +94,18 @@ class Imager(object):
         last_frame_np = None
         capture_idx = 0
         while True:
+            
+            IMAGE_DIFF_THRESHOLD = 0.02 * settings['thresholds']
+            STABILITY_THRESHOLD = IMAGE_DIFF_THRESHOLD / 2
+            
             frame_data = self.get_image()
             frame_np = img_data_to_numpy(frame_data)
             if last_capture_np is not None:
                 diff = image_diff(last_capture_np, frame_np)
-                print diff
+                print 'image diff:{} [threshold {}]'.format(diff, IMAGE_DIFF_THRESHOLD)
             is_stable = last_frame_np is None or image_diff(frame_np, last_frame_np) < STABILITY_THRESHOLD
             if is_stable:
+                print 'stable'
                 is_different = last_capture_np is None or image_diff(frame_np, last_capture_np) > IMAGE_DIFF_THRESHOLD
                 if is_different:
                     # make a capture:
@@ -114,7 +114,7 @@ class Imager(object):
                     self.last_capture = (capture_idx, frame_data)
                     last_capture_np = frame_np
             else:
-                print ' there is too much motion i am gonna wait for another frame!'
+                print ' unstable'
             last_frame_np = frame_np
             time.sleep(0.1)
     
@@ -151,7 +151,7 @@ class ImageFromCamera(Imager):
         self.camera.resolution = (597, 431)
     
     def apply_settings(self):
-        update_thresholds()
+        # update_thresholds()
         self.camera.brightness = settings['brightness']
         self.camera.contrast = settings['contrast']
         self.camera.saturation = settings['saturation']

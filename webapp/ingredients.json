@@ -100,7 +100,7 @@
   {
     "id": "salt",
     "name": "Salt",
-    "pin": 15,
+    "pin": 0,
     "pic": "salt.png",
     "icon": "pepper.svg"
   }
