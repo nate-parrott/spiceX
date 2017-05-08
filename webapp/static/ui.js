@@ -215,6 +215,7 @@ function gotFood(food) {
   food.recommendations.forEach((obj, i) => {
     if (obj.recipes.length > 0) {
       let foodName = obj.food;
+      if (foodNames.indexOf(foodName) != -1) { return }
       recipesByFood[foodName] = obj.recipes;
       foodNames.push(foodName);
       
