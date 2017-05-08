@@ -87,6 +87,7 @@ function noFood($main) {
 window.prevFoodNames = null;
 
 function gotFood(food) {
+  
   food = food || {recommendations: [], food_scores: []};
   let allFoodNames = food.recommendations.map((obj) => obj.food).join(' + ');
   if (allFoodNames === window.prevFoodNames) {
@@ -132,19 +133,25 @@ function gotFood(food) {
       }
     };
 
+
     // Make recipes a swipe carousel
     $recipes.itemslide();
     $recipes.addSlide('');
     $recipes.removeSlide($recipes[0].children.length-1);
+    let $currentIndex = $recipes.getActiveIndex();
     $recipes.on('changeActiveIndex', function(e) {
+      console.log($recipes.getActiveIndex());
       // Hide other arrows and make sure the current one has default opacity
       $('.recipe-arrow').hide();
       if ($('.recipe-container.itemslide-active').scrollTop() == 0) {
         $('.recipe-arrow').css({'opacity': '1'});
       }
 
-      let recipe = recipesByFood[foodName][$recipes.getActiveIndex()];
-      selectedRecipe(recipe);
+      if ($recipes.getActiveIndex() !== $currentIndex) {
+        let recipe = recipesByFood[foodName][$recipes.getActiveIndex()];
+        selectedRecipe(recipe);
+        $currentIndex = $recipes.getActiveIndex();
+      }
 
       // Only shows the down arrows on recipes that are long enough
       // Kind of a shitty workaround, but good enough for now
