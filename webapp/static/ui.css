@@ -177,6 +177,7 @@ html, body, #main {
   background-color: #ffffff;
   opacity: .6;
   transition: max-height .3s, opacity .2s;
+  margin-bottom: 20px;
 }
 
 
