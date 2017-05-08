@@ -89,7 +89,7 @@ window.prevFoodNames = null;
 function gotFood(food) {
   
   food = food || {recommendations: [], food_scores: []};
-  let allFoodNames = food.recommendations.map((obj) => obj.food).join(' + ');
+  let allFoodNames = food.recommendations.filter((obj) => obj.recipes.length > 0).map((obj) => obj.food).join(' + ');
   if (allFoodNames === window.prevFoodNames) {
     return;
   }
