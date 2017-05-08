@@ -23,7 +23,7 @@ function recognizeImage(imageBuffer, callback) {
   req.setRequestHeader("Content-Type", "image/jpeg");
   req.onload = (e) => {
     console.log(req.statusCode);
-    if (req.statusCode == 200) {
+    if (req.status == 200) {
       callback(JSON.parse(req.responseText));
     } else {
       callback(null);
