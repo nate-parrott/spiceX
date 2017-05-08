@@ -20,7 +20,6 @@ function fourRandos(maxIndex, arrLength) {
 
 function setSpicecons(spices, $icons) {
   let arr = fourRandos($icons.length-1, 13);
-  console.log(arr);
   for (var i = 0; i < $icons.length; i++) {
     if (arr.indexOf(i) != -1) {
       $icons[i].removeClass('fade');
