@@ -87,8 +87,16 @@ function noFood($main) {
 let _last_food = null;
 
 function gotFood(food) {
-  if (food === _last_food) {
-    return;
+  if (_last_food && food) {
+    let same = true;
+    for (let i = 0; i < 6; i++) {
+      if (food.recommendations[i] !== _last_food.recommendations[i]) {
+        same = false;
+      }
+    }
+    if (same) {
+      return;
+    }
   }
 
   _last_food = food;
