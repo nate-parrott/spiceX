@@ -169,7 +169,7 @@ function gotFood(food) {
     // add spiciness rating
     let $spiciness = $('<div></div>').addClass('spiciness').appendTo($recipe);
     $spiciness.append($('<div></div>').addClass('spiciness-label').text('spiciness'));
-    for (let i = 0; i < recipe.spicyness; i++) {
+    for (let i = 0; i < recipe.spicyness-1; i++) {
       $spiciness.append($('<div></div>').addClass('spicy'));
     }
     for (let i = 0; i < (5 - recipe.spicyness); i++) {
