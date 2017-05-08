@@ -31,6 +31,8 @@ function setSpicecons(spices, $icons) {
 
 // sorry this is gross but i am tired
 function noFood($main) {
+  setLeds([]);
+  
   $('<h2></h2>').text('zest').appendTo($main);
 
   let numCols = 6;
