@@ -90,8 +90,12 @@ function gotFood(food) {
   
   food = food || {recommendations: [], food_scores: []};
   let allFoodNames = food.recommendations.filter((obj) => obj.recipes.length > 0).map((obj) => obj.food).join(' + ');
+  console.log('all food names:', allFoodNames);
   if (allFoodNames === window.prevFoodNames) {
+    console.log(' -> not different')
     return;
+  } else {
+    console.log('is different')
   }
   window.prevFoodNames = allFoodNames;
   
