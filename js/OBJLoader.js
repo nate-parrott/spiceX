@@ -663,6 +663,7 @@ THREE.OBJLoader.prototype = {
 				buffergeometry.computeVertexNormals();
 
 			}
+      
 
 			if ( geometry.uvs.length > 0 ) {
 
