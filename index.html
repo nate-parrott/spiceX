@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zest: a spice station that sees your food and makes suggestions</title>
+  <link rel='stylesheet' href='index.css' />
+  <script src='js/jquery-3.2.1.js'></script>
+  <script src='js/three.js'></script>
+  <script src='js/MTLLoader.js'></script>
+  <script src='js/OBJLoader.js'></script>
+  <script src='js/index.js'></script>
+</head>
+<body>
+  <section id='title'>
+    <div id='rendering'></div>
+  </section>
+  <section>
+    <p>
+      Cooking with spices can seem like a bit of a dark art. Sprinkling pinches of expensive powders with esoteric names to achieve subtle flavor combination isn’t attractive to many college students, who are often shopping and cooking for themselves for the first time.
+    </p>
+    <p>
+      But spices are the key to good cooking. For ENGN 1000, Kenta Kondo, Mandi Cai, Arielle Chapin, Robert Wang and I asked: <strong>how can we initiate college students into the world of spices, giving them a familiarity with spices that’ll improve their cooking for their entire lives?</strong>
+    </p>
+    <p>
+      It’s a daunting challenge. We interviewed plenty of students who said they used only one or two spices. Some said the spice aisle was the most intimidating part of the grocery store. Some had no spices, and didn’t see the value of spending money on an inventory of spices. Most felt like they spent a lot of time on cooking, and didn’t want to spend <em>more time</em> experimenting with spices.
+    </p>
+    <p>
+      We brainstormed and prototyped several approaches — from spice pop-up stores, to vending machines, to “spice cream” machines that let people explore the taste of spices on ice cream? We spent a lot of time thinking about the <strong>best setting in which to expose college students to spices.</strong>
+    </p>
+    <p>
+      <strong>And then we remembered the dining hall</strong>. At Brown, many students eat in dining halls for a year or so before moving off-campus, or to dorms with kitchens. We realized that the dining hall was the perfect setting to expose students to spices. It offered unlimited food, so students felt free to experiment. It was repetitive, making spices an attractive way to make their food more interesting. It was centralized — whatever we ended up building could live in the dining hall. If we could make students comfortable and knowledgeable about spices in the dining hall, maybe they’d be ready to buy and use spices when they started cooking for themselves.
+    </p>
+    <p>
+      It was critical that our creation offer a seamless interaction. We envisioned several methods of introducing spices to students in the dining hall, including a table that incorporated spices with the ability to light up and an interactive wall with dispensable spices. We considered the layout of a dining hall, with its surfaces for sliding trays and separate areas for different foods, in addition to the movement of student that its layout naturally created. It seemed optimal to have the user decide how to augment their food with a database of recipes in a short amount of time. With this in mind, we chose to create something that would identify the input dish and show corresponding recipes that would each light up an array of spices, allowing the user to focus on the spice-choosing experience. This approach would give the user the benefit of choosing through a limited number of recipes without the added mental effort of searching for recipes and buying spices, which we observed to be the main barrier to spice experimentation. 
+    </p>
+  </section>
+  <section>
+    <h2>Lighting up the right spices</h2>
+    <p>
+      Each spice was lit up by 3 (specs?) LED’s in parallel powered by a GPIO pin on the Raspberry Pi. In total, we used 15 GPIO pins - one for each spice. Initially, we investigated multiplexing as an option to reduce the number of pins needed to light up every spice. Multiplexing allows you to control 8 LED’s with only 3 pins connected to a shift register, which is optimal when controlling hundreds of LED’s. Eventually, we settled on using the simpler method of connecting a single LED to a GPIO pin and using 15 pins because it was easier to control via the user interface. 
+    </p>
+  </section>
+  <section>
+    <h2>Crafting an Identity</h2>
+    <p>
+      Our branding was based on a friendly and warm color palette with easily identifiable icons and text. We chose colors that would be complementary to the natural shades of spices, with simple white icons that reflected the functionality of the object or process represented. Our name, Zest, was chosen to signify the simple and flavorful experience created by our project.
+    </p>
+  </section>
+</body>
+</html>
