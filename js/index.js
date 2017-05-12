@@ -3,7 +3,8 @@ $(document).ready(() => {
   var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / (window.innerHeight * 0.8), 0.1, 1000 );
 
   let renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-  renderer.setClearColor( 0x000000, 1);
+  renderer.setClearColor( 0x000000, 0);
+  // renderer.setPixelRatio(window.devicePixelRatio ? window.devicePixelRatio : 1);
   document.getElementById('rendering').appendChild(renderer.domElement);
   
   var geometry = new THREE.BoxGeometry( 1, 1, 1 );
@@ -13,11 +14,11 @@ $(document).ready(() => {
 
   camera.position.z = 0;
   
-  var light = new THREE.AmbientLight( 0x909090 ); // soft white light
+  var light = new THREE.AmbientLight( 0xd0d0d0 ); // soft white light
   scene.add( light );
   
-  var dirLight = new THREE.PointLight(0xffffff, 1);
-  dirLight.position.set(100, 50, -20);
+  var dirLight = new THREE.PointLight(0xd0d0d0, 1);
+  dirLight.position.set(10, 5, -10);
   scene.add(dirLight);
   
   let name = 'model13';
