@@ -12,13 +12,3 @@ section:not(#title) {
   max-width: 800px;
   line-height: 1.5;
 }
-
-#rendering {
-  width: 100vw;
-  height: 80vh;
-}
-
-#rendering > canvas {
-  width: 100%;
-  height: 100%;
-}

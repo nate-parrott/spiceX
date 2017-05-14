@@ -7,20 +7,50 @@ $(document).ready(() => {
   // renderer.setPixelRatio(window.devicePixelRatio ? window.devicePixelRatio : 1);
   document.getElementById('rendering').appendChild(renderer.domElement);
   
-  var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-  var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-  var cube = new THREE.Mesh( geometry, material );
-  // scene.add( cube );
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  // renderer.shadowCameraNear = 3;
+  // renderer.shadowCameraFar = camera.far;
+  // renderer.shadowCameraFov = 50;
+  // renderer.shadowMapBias = 0.0039;
+  // renderer.shadowMapDarkness = 0.1;
+  // renderer.shadowMapWidth = 1024;
+  // renderer.shadowMapHeight = 1024;
+  
+  var geometry = new THREE.BoxGeometry( 10000, 10000, 0.0001 );
+  var material = new THREE.MeshPhongMaterial({color: 0xffffff });
+  // material.ambient.setHex(0x505050);
+  var bg = new THREE.Mesh( geometry, material );
+  scene.add( bg );
+  bg.position.y = -13;
+  bg.rotation.x = Math.PI * -0.4;
+  bg.receiveShadow = true;
 
   camera.position.z = 0;
   
-  var light = new THREE.AmbientLight( 0xd0d0d0 ); // soft white light
+  var light = new THREE.AmbientLight( 0x404040 ); // soft white light
   scene.add( light );
   
-  var dirLight = new THREE.PointLight(0xd0d0d0, 1);
-  dirLight.position.set(10, 5, -10);
+  var dirLight = new THREE.PointLight(0xF71C86, 1);
+  dirLight.position.set(10, 10, 0);
   scene.add(dirLight);
+  dirLight.castShadow = true;
   
+  dirLight = new THREE.PointLight(0xFBDA61, 1);
+  dirLight.position.set(-10, 10, 0);
+  scene.add(dirLight);
+  dirLight.castShadow = true;
+  
+  let group = null;
+  let updateRotation = (dx, dy) => {
+    if (group) {
+      group.position.y = 0;
+      group.rotation.y = -Math.PI/2 + Math.PI * 0.1 * (dx-0.5);
+      group.position.z = -25;
+      group.rotation.x = Math.PI * 0.1 + Math.PI * 0.1 * (dy-0.5);
+    }
+  }
+    
   let name = 'model13';
   JSM.ConvertURLListToJsonData(['3d/' + name + '.obj', '3d/' + name + '.mtl'], {
     onError: (e) => console.log(e),
@@ -32,17 +62,14 @@ $(document).ready(() => {
         onStart: () => {},
         onProgress: () => {},
         onFinish: () => {
-          let group = new THREE.Group();
+          group = new THREE.Group();
           meshes.forEach((mesh) => {
             group.add(mesh);
-            
+            mesh.castShadow = true;
           })
           scene.add(group);
           
-          group.position.y = 0;
-          group.rotation.y = -Math.PI/2;
-          group.position.z = -25;
-          group.rotation.x = Math.PI * 0.1
+          updateRotation(0.5, 0.5);
         }
       });
     }
@@ -84,8 +111,19 @@ $(document).ready(() => {
   
   let render = () => {
   	requestAnimationFrame(render);
-    renderer.setSize( window.innerWidth, window.innerHeight * 0.8 );
   	renderer.render(scene, camera);
   }
   render();
+  
+  $(document.body).mousemove((e) => {
+    updateRotation(e.clientX / window.innerWidth, e.clientY / window.innerHeight);
+  });
+  
+  $(window).resize(() => {
+    let width = window.innerWidth;
+    let height = window.innerHeight * 0.8;
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+    renderer.setSize( width, height );
+  }).resize();
 });
