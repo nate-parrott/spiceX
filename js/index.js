@@ -9,17 +9,18 @@ $(document).ready(() => {
   
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-  // renderer.shadowCameraNear = 3;
-  // renderer.shadowCameraFar = camera.far;
-  // renderer.shadowCameraFov = 50;
-  // renderer.shadowMapBias = 0.0039;
-  // renderer.shadowMapDarkness = 0.1;
-  // renderer.shadowMapWidth = 1024;
-  // renderer.shadowMapHeight = 1024;
+  renderer.shadowMapSoft = true;
+  renderer.shadowCameraNear = 3;
+  renderer.shadowCameraFar = camera.far;
+  renderer.shadowCameraFov = 50;
+  renderer.shadowMapBias = 0.0039;
+  renderer.shadowMapDarkness = 0.9;
+  renderer.shadowMapWidth = 1024;
+  renderer.shadowMapHeight = 1024;
   
-  var geometry = new THREE.BoxGeometry( 10000, 10000, 0.0001 );
-  var material = new THREE.MeshPhongMaterial({color: 0xffffff });
-  // material.ambient.setHex(0x505050);
+  var geometry = new THREE.BoxGeometry( 500, 200, 0.0001 );
+  var material = new THREE.MeshPhongMaterial({color: 0x101010 });
+  material.emissive.setHex(0xe0e0e0);
   var bg = new THREE.Mesh( geometry, material );
   scene.add( bg );
   bg.position.y = -13;
@@ -31,22 +32,24 @@ $(document).ready(() => {
   var light = new THREE.AmbientLight( 0x404040 ); // soft white light
   scene.add( light );
   
-  var dirLight = new THREE.PointLight(0xF71C86, 1);
+  var dirLight = new THREE.PointLight(0xffffff, 1); // new THREE.PointLight(0xF71C86, 1);
   dirLight.position.set(10, 10, 0);
   scene.add(dirLight);
   dirLight.castShadow = true;
+  dirLight.intensity = 1.5;
   
-  dirLight = new THREE.PointLight(0xFBDA61, 1);
+  dirLight = new THREE.PointLight(0xffffff, 1); // new THREE.PointLight(0xFBDA61, 1);
   dirLight.position.set(-10, 10, 0);
   scene.add(dirLight);
   dirLight.castShadow = true;
+  dirLight.intensity = 1.5;
   
   let group = null;
   let updateRotation = (dx, dy) => {
     if (group) {
       group.position.y = 0;
       group.rotation.y = -Math.PI/2 + Math.PI * 0.1 * (dx-0.5);
-      group.position.z = -25;
+      group.position.z = -20;
       group.rotation.x = Math.PI * 0.1 + Math.PI * 0.1 * (dy-0.5);
     }
   }
@@ -64,6 +67,7 @@ $(document).ready(() => {
         onFinish: () => {
           group = new THREE.Group();
           meshes.forEach((mesh) => {
+            mesh.position.x = -5;
             group.add(mesh);
             mesh.castShadow = true;
           })

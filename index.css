@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+
 body {
-  font-family: sans-serif;
-  background-color: #fbfbfb;
+  font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
+  background-color: white;
   color: #222;
   margin: 0;
 }
@@ -11,4 +13,37 @@ section:not(#title) {
   margin: 2em auto;
   max-width: 800px;
   line-height: 1.5;
+}
+
+#title-text {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 30vh;
+  justify-content: center;
+  align-items: center;
+}
+
+#title-text > div {
+  width: 80%;
+}
+
+#title-text h1 {
+  font-size: 10vh;
+  margin: 0;
+}
+
+#title-text p {
+  font-size: 1.2em;
+  opacity: 0.5;
+}
+
+#rendering {
+  z-index: 10;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Roboto Mono';
 }
