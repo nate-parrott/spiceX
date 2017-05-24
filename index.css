@@ -47,3 +47,39 @@ section:not(#title) {
 h1, h2, h3, h4, h5 {
   
 }
+
+figure {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+figure > img {
+  width: 100%;
+}
+
+figure .multi {
+  position: relative;
+  width: 100%;
+}
+
+figure .multi > ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+figure .multi > ul > li {
+  
+}
+
+figure .multi > ul > li > img {
+  width: 100%;
+}
