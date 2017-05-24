@@ -42,14 +42,14 @@
 		<section>
 			<h2>Initial Design and Prototyping</h2>
 			<figure>
-        <div class='multi' style='padding-bottom: 69.3311582382%'><ul><li style='width: 95.0%'><img src='images/sketch.png' /></li></ul></div>
+        <div class='multi' style='padding-bottom: 69.3311582382%'><ul><li style='flex-grow: 1.0'><img src='images/sketch.png' /></li></ul></div>
 			</figure>
 			<p>Low fidelity sketches and prototyping were used to conceptualize possible solutions and to contextualize the problem in a tangible form. We brainstormed and prototyped several approaches — from spice pop-up stores, to vending machines, to “spice cream” machines that let people explore the taste of spices on ice cream. We spent a lot of time thinking about <strong>the best setting in which to expose college students to spices.</strong></p>
 		</section>
 		<section>
 			<h2>User Research, Part 2</h2>
 			<figure>
-        <div class='multi' style='padding-bottom: 99.7703788749%'><ul><li style='width: 95.0%'><img src='images/empathymap.png' /></li></ul></div>
+        <div class='multi' style='padding-bottom: 99.7703788749%'><ul><li style='flex-grow: 1.0'><img src='images/empathymap.png' /></li></ul></div>
 				<figcaption>Figure 1: Empathy maps constructed from individual interviews</figcaption>
 			</figure>
 			<p>
@@ -98,7 +98,7 @@
 				We also knew that the user would have to be able to choose different foods to see recipes for, as the device may recognize multiple on one plate or be unsure of certain foods. Given the small size of the screen (800 x 480 pixels), having a horizontal navigation bar seemed more practical as it takes up less space than a vertical sidebar, and having it placed on top felt more logical as the choice of food would come before the choice of recipe.
 			</p>
 			<figure>
-        <div class='multi' style='padding-bottom: 17.2573265301%'><ul><li style='width: 27.7757383614%'><img src='images/mock1.png' /></li><li style='width: 33.5873519106%'><img src='images/mock2.png' /></li><li style='width: 33.636909728%'><img src='images/mock3.png' /></li></ul></div>
+<div class='multi' style='padding-bottom: 17.2573265301%'><ul><li style='flex-grow: 0.292376193278'><img src='images/mock1.png' /></li><li style='flex-grow: 0.353551072743'><img src='images/mock2.png' /></li><li style='flex-grow: 0.354072733979'><img src='images/mock3.png' /></li></ul></div>
 				<figcaption>
 					Figure 2: Three mockups, including an "input-directed" one (top), a "scrollable" one (left), and a "cards" one (right)
 				</figcaption>
@@ -107,7 +107,7 @@
 				Low resolution mockups were created in Adobe Illustrator after some initial sketching. The wireframes were made lightly interactive in Keynote (each mockup included a few different pages) and were then tested by a few students and one non-student. Participants understood how to use each interface, but preferred those that allowed for freer exploration.
 			</p>
 			<figure>
-        <div class='multi' style='padding-bottom: 25.3056234719%'><ul><li style='width: 47.5%'><img src='images/smallercards1.png' /></li><li style='width: 47.5%'><img src='images/smallercards2.png' /></li></ul></div>
+        <div class='multi' style='padding-bottom: 25.3056234719%'><ul><li style='flex-grow: 0.5'><img src='images/smallercards1.png' /></li><li style='flex-grow: 0.5'><img src='images/smallercards2.png' /></li></ul></div>
 				<figcaption>
 					Figure 3: Experimenting with smaller cards
 				</figcaption>
@@ -116,7 +116,7 @@
 				We also felt that the "cards" approach encouraged focus on one recipe at a time. The previous iteration didn't feel quite as free as the "scrollable" interface, so we experimented with smaller cards, which made the recipes feel more easily explorable--with smaller cards, the surroundings recipes could be "previewed" before being focus on. What's more, the cards are very easy and quick to swipe between, providing an experience where all the possible recipes are laid out and ready to be accessed without any friction in looking between them.
 			</p>
 			<figure>
-        <div class='multi' style='padding-bottom: 30.1535974131%'><ul><li style='width: 47.3080032336%'><img src='images/highres1.png' /></li><li style='width: 47.6919967664%'><img src='images/highres2.png' /></li></ul></div>
+        <div class='multi' style='padding-bottom: 30.1535974131%'><ul><li style='flex-grow: 0.497978981407'><img src='images/highres1.png' /></li><li style='flex-grow: 0.502021018593'><img src='images/highres2.png' /></li></ul></div>
 				<figcaption>
 					Figure 4: Exploring design elements in the high resolutions mockups
 				</figcaption>
@@ -131,18 +131,18 @@
 				In the final mockup, we gave the spices a good amount of space and color to bring focus to them. Because they are given this focus and are associated with a visual (and, eventually, a taste), we hypothesized that students who would use this regularly would start to recognize spices that they hadn't known before. In our interviews we found that the participants, when learning to cook and when buying new spices, would tend to lean towards spices that they recognized, especially when they could associate the them with specific dishes. With zest, the user "makes" those dishes themselves, and hopefully will want to use the same spices when they start to cook on their own.
 			</p>
 			<figure>
-				<img src='images/finalmock.png'/>
+        <div class='multi' style='padding-bottom: 60.312243221%'><ul><li style='flex-grow: 1.0'><img src='images/finalmock.png' /></li></ul></div>
 				<figcaption>Figure 5: The main page of the final mockup</figcaption>
 			</figure>
 			<figure>
-				<img src='images/finalfrontend.png'/>
+<div class='multi' style='padding-bottom: 59.6724667349%'><ul><li style='flex-grow: 1.0'><img src='images/finalfrontend.png' /></li></ul></div>
 				<figcaption>Figure 6: The final frontend product shown on the website, here displaying recipes for chicken</figcaption>
 			</figure>
 			<p>
 				The final frontend product was coded in HTML, CSS, and jQuery, and exists as a web page on our Google App Engine website (though it is a web page, it is only meant to be accessed from the built device). A carousel slider was used to control the cards, which can be swiped between on the touchscreen of the Pi. When a card is swiped to, it takes center stage on the screen, giving it focus. The surrounding recipes are at a lower opacity to add to that focus. The icon above each recipe is based on which spice is the biggest player in it (i.e. which spice has the most shakes)--each spice is associated with a certain icon, though some share the same one (for instance, chipotle, chili, and cayenne each shared the spicy pepper icon).
 			</p>
 			<figure>
-				<img src='images/idlestate.png'/>
+<div class='multi' style='padding-bottom: 59.2948717949%'><ul><li style='flex-grow: 1.0'><img src='images/idlestate.png' /></li></ul></div>
 				<figcaption>Figure 7: The idle state of the device when no food has been placed underneath. It returns to this state before a plate has been placed and after it has been removed</figcaption>
 			</figure>
 			<p>
@@ -167,8 +167,8 @@
 				After this general configuration was established, we looked at incorporating key hardware including a; raspberry pi 3, raspberry pi camera, 7” LCD touchscreen and LED’s. This also included cabling, wiring and fasteners and power supply. Digital models were then generated to establish the visual language needed to achieve the <strong>integrated</strong> and <strong>seamless</strong> experience as well as accounting for the rough volumes of the listed hardware.
 			</p>
 			<figure>
-        <div class='multi' style='padding-bottom: 23.1116715723%'><ul><li style='width: 30.1486581406%'><img src='images/proto1.png' /></li><li style='width: 31.9894338425%'><img src='images/proto2.png' /></li><li style='width: 32.8619080169%'><img src='images/proto3.png' /></li></ul></div>
-        <div class='multi' style='padding-bottom: 42.4330232205%'><ul><li style='width: 64.3660268621%'><img src='images/proto4.png' /></li><li style='width: 30.6339731379%'><img src='images/proto5.png' /></li></ul></div>
+        <div class='multi' style='padding-bottom: 23.1116715723%'><ul><li style='flex-grow: 0.317354296217'><img src='images/proto1.png' /></li><li style='flex-grow: 0.336730882552'><img src='images/proto2.png' /></li><li style='flex-grow: 0.345914821231'><img src='images/proto3.png' /></li></ul></div>
+        <div class='multi second' style='padding-bottom: 42.4330232205%'><ul><li style='flex-grow: 0.677537124864'><img src='images/proto4.png' /></li><li style='flex-grow: 0.322462875136'><img src='images/proto5.png' /></li></ul></div>
 			</figure>
 			<p>
 				In tandem with CAD modelling, low fidelity prototypes were created to gather ergonomic data, including heights and angles of various elements such as the screen and base. In addition, the precise camera angle for optimal image recognition was also determined through this adjustable low-fidelity mock-up.
@@ -176,8 +176,10 @@
 			<p>
 				With all the aforementioned factors accounted for, a Solidworks model was created which included accurate models of the LCD screen, Pi board and Pi Camera to ensure proper fit. A quick model of the final form was made through 3D printing and laser cutting. The jars were also set to the side to determine the scale of the rack. At this point we began to design the rack assembly. This was fairly straightforward as it translated the design language of the main console into something that had to hold 3 LED’s in a ring around each of the 15 available slots.
 			<figure>
-        <div class='multi' style='padding-bottom: 25.3144453443%'><ul><li style='width: 23.7850309381%'><img src='images/render1.png' /></li><li style='width: 25.0871906645%'><img src='images/render2.png' /></li><li style='width: 21.5436477565%'><img src='images/render3.png' /></li><li style='width: 24.5841306409%'><img src='images/render4.png' /></li></ul></div>
-        <div class='multi' style='padding-bottom: 37.4881195934%'><ul><li style='width: 47.6239589542%'><img src='images/cardboard1.png' /></li><li style='width: 47.3760410458%'><img src='images/cardboard2.png' /></li></ul></div>
+<div class='multi' style='padding-bottom: 32.7387929601%'><ul><li style='flex-grow: 0.341525135652'><img src='images/render2.png' /></li><li style='flex-grow: 0.323798149672'><img src='images/render1.png' /></li><li style='flex-grow: 0.334676714676'><img src='images/render4.png' /></li></ul></div>
+        
+        <div class='multi' style='padding-bottom: 37.4881195934%'><ul><li style='flex-grow: 0.501304831097'><img src='images/cardboard1.png' /></li><li style='flex-grow: 0.498695168903'><img src='images/cardboard2.png' /></li></ul></div>
+        
         <figcaption>
         Figure 8: Prototype CAD models and cardboard prototypes
         </figcaption>
@@ -193,7 +195,7 @@
 			</p>
 			<figure>
 				<div>
-          <div class='multi' style='padding-bottom: 37.4705003697%'><ul><li style='width: 47.4874055312%'><img src='images/cnc1.png' /></li><li style='width: 47.5125944688%'><img src='images/cnc2.png' /></li></ul></div>
+<div class='multi' style='padding-bottom: 37.4705003697%'><ul><li style='flex-grow: 0.499867426644'><img src='images/cnc1.png' /></li><li style='flex-grow: 0.500132573356'><img src='images/cnc2.png' /></li></ul></div>
 				</div>
 				<figcaption>
 					Figure 9: The base after CNC alongside 3D printed parts
@@ -201,7 +203,7 @@
 			</figure>
 			<p>The spice stand also used the CNC for the body and 3D printing for the more complex LED housing and diffuser. The acrylic diffuser rings were laser cut for precision and consistency.</p>
 			<figure>
-        <div class='multi' style='padding-bottom: 37.1259425022%'><ul><li style='width: 47.5503711559%'><img src='images/build1.png' /></li><li style='width: 47.4496288441%'><img src='images/build2.png' /></li></ul></div>
+<div class='multi' style='padding-bottom: 37.1259425022%'><ul><li style='flex-grow: 0.500530222694'><img src='images/build1.png' /></li><li style='flex-grow: 0.499469777306'><img src='images/build2.png' /></li></ul></div>
 				<figcaption>
 					Figure 10: The painted base and stand alongside the unfinished spice rack (top) and the painted spice rack with light-up acrylic rings (bottom)
 				</figcaption>
@@ -210,13 +212,13 @@
 				Both console and holder underwent several cycles of priming/filling and sanding until we obtained the desired surface finish. At which point, we used 2-3 coats of enamel paint to create the smooth surface finish.
 			</p>
 			<figure class='multi'>
-<div class='multi' style='padding-bottom: 74.2424242424%'><ul><li style='width: 95.0%'><img src='images/wires1.png' /></li></ul></div>
+<div class='multi' style='padding-bottom: 74.2424242424%'><ul><li style='flex-grow: 1.0'><img src='images/wires1.png' /></li></ul></div>
 				<figcaption>
 					Figure 11: Wires to attach the screen to the Pi, which was housed in the "neck" of the stand
 				</figcaption>
 			</figure>
 			<figure>
-<div class='multi' style='padding-bottom: 66.8049792531%'><ul><li style='width: 95.0%'><img src='images/finalform.png' /></li></ul></div>        
+<div class='multi' style='padding-bottom: 66.8049792531%'><ul><li style='flex-grow: 1.0'><img src='images/finalform.png' /></li></ul></div>
 				<figcaption>
 					Figure 12: The final form with broccoli being identified and spices lighting up according to the currently-shown recipe
 				</figcaption>
@@ -234,7 +236,7 @@
 				Our branding was based on a friendly and warm color palette with easily identifiable icons and text. We chose colors that would be complementary to the natural shades of spices, with simple white icons that reflected the functionality of the object or process represented. The font, <em>Apercu</em>, was used for simplicity and readability throughout our user interface and signage. Icons were also created to easily convey the functionality of our device so that users would know what to do upon encountering its user interface. Our name, <em>zest</em>, was chosen to signify the simple and flavorful experience created by our project.
 			</p>
 			<figure>
-<div class='multi' style='padding-bottom: 129.421768707%'><ul><li style='width: 95.0%'><img src='images/branding.png' /></li></ul></div>
+<div class='multi' style='padding-bottom: 129.421768707%'><ul><li style='flex-grow: 1.0'><img src='images/branding.png' /></li></ul></div>
 			</figure>
 		</section>
 		<section>

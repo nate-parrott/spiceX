@@ -49,8 +49,8 @@ h1, h2, h3, h4, h5 {
 }
 
 figure {
-  margin-right: 0;
-  margin-left: 0;
+  margin-right: -2em;
+  margin-left: -2em;
 }
 
 figure > img {
@@ -68,7 +68,6 @@ figure .multi > ul {
   margin: 0;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   position: absolute;
   top: 0;
   left: 0;
@@ -77,9 +76,35 @@ figure .multi > ul {
 }
 
 figure .multi > ul > li {
-  
+  position: relative;
+  height: 100%;
+  flex-basis: 0;
+}
+
+figure .multi > ul > li:not(:last-child) {
+  margin-right: 4px;
 }
 
 figure .multi > ul > li > img {
   width: 100%;
+}
+
+figure .multi > ul > li > img:last-child {
+  right: 0;
+}
+
+figure > * {
+  margin: 4px;
+}
+
+figure .multi.second > * {
+  margin-top: -2px;
+}
+
+figcaption {
+  text-align: center;
+  opacity: 0.5;
+  margin: auto;
+  margin-top: 1em;
+  width: 70%;
 }
