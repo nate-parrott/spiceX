@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+@import url('/fonts.css');
 
 body {
-  font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
+  font-family: 'Apercu', sans-serif;
   background-color: white;
   color: #222;
   margin: 0;
@@ -45,5 +45,5 @@ section:not(#title) {
 }
 
 h1, h2, h3, h4, h5 {
-  font-family: 'Roboto Mono';
+  
 }
