@@ -1,4 +1,4 @@
-@import url('/fonts.css');
+@import url('fonts.css');
 
 body {
   font-family: 'Apercu', sans-serif;
@@ -33,11 +33,11 @@ section:not(#title) {
 }
 
 #title .bg {
-  background-image: url(/images/arielle.jpg);
+  background-image: url(images/arielle.jpg);
 }
 
 #title .text {
-  background-image: url(/images/overlay.svg);
+  background-image: url(images/overlay.svg);
   color: transparent;
 }
 
