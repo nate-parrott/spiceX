@@ -91,7 +91,7 @@ figure .multi > ul > li > img:last-child {
 }
 
 figure > * {
-  margin: 4px;
+  margin-bottom: 4px;
 }
 
 figure .multi.second > * {
@@ -113,3 +113,14 @@ a {
 img.bordered {
   box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.1);
 }
+
+/*@media screen and (max-width: 600px) {
+  figure.scrollable {
+    overflow-x: auto;
+    -webkit-overflow-scroll: touch;
+  }
+  figure.scrollable div {
+    width: 900px;
+  }
+}
+*/
