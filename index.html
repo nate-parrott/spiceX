@@ -69,11 +69,77 @@
 			</figure>
 		</section>
 		<section>
-			<h2>Final Design</h2>
+			<h2>Final Concept</h2>
 			<p>
 				It was critical that our creation offer a <strong>seamless</strong> interaction. We envisioned several methods of introducing spices to students in the dining hall, including a table that incorporated spices with the ability to light up and an interactive wall with dispensable spices. We considered the layout of a dining hall, with its surfaces for sliding trays and separate areas for different foods, in addition to the movement of student that its layout naturally created. It seemed optimal to have the user decide how to augment their food with a database of recipes in a short amount of time. With this in mind, we chose to create something that would identify the input dish and show corresponding recipes that would each light up an array of spices, allowing the user to focus on the spice-choosing experience. This approach would give the user the benefit of choosing through a limited number of recipes without the added mental effort of searching for recipes and buying spices, which we observed to be the main barrier to spice experimentation. 
 			</p>
 		</section>
+
+		<section>
+			<h2>Form Design</h2>
+			<p>
+				The final form was designed to be intuitive and approachable. Rounded edges and simple geometries invite the users to engage the device, with visual elements such as the detente and LEDs to guide the user through the process. These include the screen (GUI), platform and spice rack. The process that led us to this form included several different physical prototypes and numerous digital models.
+			</p>
+			<p>
+				We knew the design needed a camera above the dish to reliably identify the different types of foods. This constraint, along with the need for a section to store the spices and a screen for a GUI to display the information helped us narrow down the form.
+			</p>
+			<p>
+				After several iterations, we concluded the screen and camera should be housed in the same area to simplify the form as well as hide the camera- thus making the experience that much more mysterious and magical. The spice jars would then be housed in a separate assembly to the side.
+			</p>
+			<p>
+				After this general configuration was established, we looked at incorporating key hardware including a; raspberry pi 3, raspberry pi camera, 7” LCD touchscreen and LED’s. This also included cabling, wiring and fasteners and power supply. Digital models were then generated to establish the visual language needed to achieve the <strong>integrated</strong> and <strong>seamless</strong> experience as well as accounting for the rough volumes of the listed hardware.
+			</p>
+			<figure>
+        <div class='multi' style='padding-bottom: 23.1116715723%'><ul><li style='flex-grow: 0.317354296217'><img src='images/proto1.png' /></li><li style='flex-grow: 0.336730882552'><img src='images/proto2.png' /></li><li style='flex-grow: 0.345914821231'><img src='images/proto3.png' /></li></ul></div>
+        <div class='multi second' style='padding-bottom: 42.4330232205%'><ul><li style='flex-grow: 0.677537124864'><img src='images/proto4.png' /></li><li style='flex-grow: 0.322462875136'><img src='images/proto5.png' /></li></ul></div>
+			</figure>
+			<p>
+				In tandem with CAD modelling, low fidelity prototypes were created to gather ergonomic data, including heights and angles of various elements such as the screen and base. In addition, the precise camera angle for optimal image recognition was also determined through this adjustable low-fidelity mock-up.
+			</p>
+			<p>
+				With all the aforementioned factors accounted for, a Solidworks model was created which included accurate models of the LCD screen, Pi board and Pi Camera to ensure proper fit. A quick model of the final form was made through 3D printing and laser cutting. The jars were also set to the side to determine the scale of the rack. At this point we began to design the rack assembly. This was fairly straightforward as it translated the design language of the main console into something that had to hold 3 LED’s in a ring around each of the 15 available slots.
+			<figure class='scrollable'>
+<div class='multi' style='padding-bottom: 32.7387929601%'><ul><li style='flex-grow: 0.341525135652'><img src='images/render2.png' class='bordered' /></li><li style='flex-grow: 0.323798149672'><img src='images/render1.png' class='bordered' /></li><li style='flex-grow: 0.334676714676'><img src='images/render4.png' class='bordered' /></li></ul></div>
+    
+        <div class='multi' style='padding-bottom: 37.4881195934%'><ul><li style='flex-grow: 0.501304831097'><img src='images/cardboard1.png' /></li><li style='flex-grow: 0.498695168903'><img src='images/cardboard2.png' /></li></ul></div>
+    
+        <figcaption>
+        Figure 8: Prototype CAD models and cardboard prototypes
+        </figcaption>
+			</figure>
+		</section>
+		<section>
+			<h2>Prototyping</h2>
+			<p>
+				Having determined that everything was in order, we proceeded to make the final functioning model. This involved several prototyping machines, techniques and processes over a course of 2 weeks.
+			</p>
+			<p>
+				The console uses two main processes, the CNC for the MDF base and ABS 3D printing for the stem and screen/camera housing. The CNC was chosen for the base as it was a fairly simple form that needed very little subtraction to obtain the form that we desired. The printed ABS parts required a void in the center for the cabling and wiring to pass through as well as durability. Parts were then epoxied together and sanded smooth.
+			</p>
+			<figure class='scrollable'>
+<div class='multi' style='padding-bottom: 37.4705003697%'><ul><li style='flex-grow: 0.499867426644'><img src='images/cnc1.png' /></li><li style='flex-grow: 0.500132573356'><img src='images/cnc2.png' /></li></ul></div>
+				<figcaption>
+					Figure 9: The base after CNC alongside 3D printed parts
+				</figcaption>
+			</figure>
+			<p>The spice stand also used the CNC for the body and 3D printing for the more complex LED housing and diffuser. The acrylic diffuser rings were laser cut for precision and consistency.</p>
+			<figure class='scrollable'>
+<div class='multi' style='padding-bottom: 37.1259425022%'><ul><li style='flex-grow: 0.500530222694'><img src='images/build1.png' /></li><li style='flex-grow: 0.499469777306'><img src='images/build2.png' /></li></ul></div>
+				<figcaption>
+					Figure 10: The painted base and stand alongside the unfinished spice rack (top) and the painted spice rack with light-up acrylic rings (bottom)
+				</figcaption>
+			</figure>
+			<p>
+				Both console and holder underwent several cycles of priming/filling and sanding until we obtained the desired surface finish. At which point, we used 2-3 coats of enamel paint to create the smooth surface finish.
+			</p>
+			<figure class='multi'>
+<div class='multi' style='padding-bottom: 74.2424242424%'><ul><li style='flex-grow: 1.0'><img src='images/wires1.png' /></li></ul></div>
+				<figcaption>
+					Figure 11: Wires to attach the screen to the Pi, which was housed in the "neck" of the stand
+				</figcaption>
+			</figure>
+    </section>
+    
 		<section>
 			<h2>Image Recognition and Technology</h2>
 			<p>
@@ -157,69 +223,8 @@
 				The interface was designed to function as the point of action for the user after putting down their food, and was integrated with the hardware of the device so that the user wouldn't have to think about anything except what recipe they wanted and how closely they wanted to follow it when using the spices.
 			</p>
 		</section>
-		<section>
-			<h2>Form Design</h2>
-			<p>
-				The final form was designed to be intuitive and approachable. Rounded edges and simple geometries invite the users to engage the device, with visual elements such as the detente and LEDs to guide the user through the process. These include the screen (GUI), platform and spice rack. The process that led us to this form included several different physical prototypes and numerous digital models.
-			</p>
-			<p>
-				We knew the design needed a camera above the dish to reliably identify the different types of foods. This constraint, along with the need for a section to store the spices and a screen for a GUI to display the information helped us narrow down the form.
-			</p>
-			<p>
-				After several iterations, we concluded the screen and camera should be housed in the same area to simplify the form as well as hide the camera- thus making the experience that much more mysterious and magical. The spice jars would then be housed in a separate assembly to the side.
-			</p>
-			<p>
-				After this general configuration was established, we looked at incorporating key hardware including a; raspberry pi 3, raspberry pi camera, 7” LCD touchscreen and LED’s. This also included cabling, wiring and fasteners and power supply. Digital models were then generated to establish the visual language needed to achieve the <strong>integrated</strong> and <strong>seamless</strong> experience as well as accounting for the rough volumes of the listed hardware.
-			</p>
-			<figure>
-        <div class='multi' style='padding-bottom: 23.1116715723%'><ul><li style='flex-grow: 0.317354296217'><img src='images/proto1.png' /></li><li style='flex-grow: 0.336730882552'><img src='images/proto2.png' /></li><li style='flex-grow: 0.345914821231'><img src='images/proto3.png' /></li></ul></div>
-        <div class='multi second' style='padding-bottom: 42.4330232205%'><ul><li style='flex-grow: 0.677537124864'><img src='images/proto4.png' /></li><li style='flex-grow: 0.322462875136'><img src='images/proto5.png' /></li></ul></div>
-			</figure>
-			<p>
-				In tandem with CAD modelling, low fidelity prototypes were created to gather ergonomic data, including heights and angles of various elements such as the screen and base. In addition, the precise camera angle for optimal image recognition was also determined through this adjustable low-fidelity mock-up.
-			</p>
-			<p>
-				With all the aforementioned factors accounted for, a Solidworks model was created which included accurate models of the LCD screen, Pi board and Pi Camera to ensure proper fit. A quick model of the final form was made through 3D printing and laser cutting. The jars were also set to the side to determine the scale of the rack. At this point we began to design the rack assembly. This was fairly straightforward as it translated the design language of the main console into something that had to hold 3 LED’s in a ring around each of the 15 available slots.
-			<figure class='scrollable'>
-<div class='multi' style='padding-bottom: 32.7387929601%'><ul><li style='flex-grow: 0.341525135652'><img src='images/render2.png' class='bordered' /></li><li style='flex-grow: 0.323798149672'><img src='images/render1.png' class='bordered' /></li><li style='flex-grow: 0.334676714676'><img src='images/render4.png' class='bordered' /></li></ul></div>
-        
-        <div class='multi' style='padding-bottom: 37.4881195934%'><ul><li style='flex-grow: 0.501304831097'><img src='images/cardboard1.png' /></li><li style='flex-grow: 0.498695168903'><img src='images/cardboard2.png' /></li></ul></div>
-        
-        <figcaption>
-        Figure 8: Prototype CAD models and cardboard prototypes
-        </figcaption>
-			</figure>
-		</section>
-		<section>
-			<h2>Prototyping</h2>
-			<p>
-				Having determined that everything was in order, we proceeded to make the final functioning model. This involved several prototyping machines, techniques and processes over a course of 2 weeks.
-			</p>
-			<p>
-				The console uses two main processes, the CNC for the MDF base and ABS 3D printing for the stem and screen/camera housing. The CNC was chosen for the base as it was a fairly simple form that needed very little subtraction to obtain the form that we desired. The printed ABS parts required a void in the center for the cabling and wiring to pass through as well as durability. Parts were then epoxied together and sanded smooth.
-			</p>
-			<figure class='scrollable'>
-<div class='multi' style='padding-bottom: 37.4705003697%'><ul><li style='flex-grow: 0.499867426644'><img src='images/cnc1.png' /></li><li style='flex-grow: 0.500132573356'><img src='images/cnc2.png' /></li></ul></div>
-				<figcaption>
-					Figure 9: The base after CNC alongside 3D printed parts
-				</figcaption>
-			</figure>
-			<p>The spice stand also used the CNC for the body and 3D printing for the more complex LED housing and diffuser. The acrylic diffuser rings were laser cut for precision and consistency.</p>
-			<figure class='scrollable'>
-<div class='multi' style='padding-bottom: 37.1259425022%'><ul><li style='flex-grow: 0.500530222694'><img src='images/build1.png' /></li><li style='flex-grow: 0.499469777306'><img src='images/build2.png' /></li></ul></div>
-				<figcaption>
-					Figure 10: The painted base and stand alongside the unfinished spice rack (top) and the painted spice rack with light-up acrylic rings (bottom)
-				</figcaption>
-			</figure>
-			<p>
-				Both console and holder underwent several cycles of priming/filling and sanding until we obtained the desired surface finish. At which point, we used 2-3 coats of enamel paint to create the smooth surface finish.
-			</p>
-			<figure class='multi'>
-<div class='multi' style='padding-bottom: 74.2424242424%'><ul><li style='flex-grow: 1.0'><img src='images/wires1.png' /></li></ul></div>
-				<figcaption>
-					Figure 11: Wires to attach the screen to the Pi, which was housed in the "neck" of the stand
-				</figcaption>
-			</figure>
+    <section>
+      <h2>Final Product</h2>
 			<figure>
 <div class='multi' style='padding-bottom: 66.8049792531%'><ul><li style='flex-grow: 1.0'><img src='images/finalform.png' /></li></ul></div>
 				<figcaption>
