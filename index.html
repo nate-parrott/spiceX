@@ -99,11 +99,12 @@
 			<p>
 				In tandem with CAD modelling, low fidelity prototypes were created to gather ergonomic data, including heights and angles of various elements such as the screen and base. In addition, the precise camera angle for optimal image recognition was also determined through this adjustable low-fidelity mock-up.
 			</p>
+      <figure class='scrollable'>
+        <div class='multi' style='padding-bottom: 32.7387929601%'><ul><li style='flex-grow: 0.341525135652'><img src='images/render2.png' class='bordered' /></li><li style='flex-grow: 0.323798149672'><img src='images/render1.png' class='bordered' /></li><li style='flex-grow: 0.334676714676'><img src='images/render4.png' class='bordered' /></li></ul></div>
+      </figure>
 			<p>
 				With all the aforementioned factors accounted for, a Solidworks model was created which included accurate models of the LCD screen, Pi board and Pi Camera to ensure proper fit. A quick model of the final form was made through 3D printing and laser cutting. The jars were also set to the side to determine the scale of the rack. At this point we began to design the rack assembly. This was fairly straightforward as it translated the design language of the main console into something that had to hold 3 LED’s in a ring around each of the 15 available slots.
-			<figure class='scrollable'>
-<div class='multi' style='padding-bottom: 32.7387929601%'><ul><li style='flex-grow: 0.341525135652'><img src='images/render2.png' class='bordered' /></li><li style='flex-grow: 0.323798149672'><img src='images/render1.png' class='bordered' /></li><li style='flex-grow: 0.334676714676'><img src='images/render4.png' class='bordered' /></li></ul></div>
-    
+			<figure class='scrollable'>    
         <div class='multi' style='padding-bottom: 37.4881195934%'><ul><li style='flex-grow: 0.501304831097'><img src='images/cardboard1.png' /></li><li style='flex-grow: 0.498695168903'><img src='images/cardboard2.png' /></li></ul></div>
     
         <figcaption>
@@ -157,6 +158,10 @@
 			<p>
 				Before we’d finished building the prototype, we brought the Pi and camera to the dining hall to test. Recognition was initially slow and inaccurate, but we tweaked parameters and camera settings to speed up recognition, such that food could be detected in 1–2 seconds. We later discovered that recognition accuracy was highly dependent on ambient lighting conditions, so we built an interface for adjusting the camera’s exposure and saturation on-the-fly. In the end, the device was able to recognize many foods well — salads and chicken were particularly easy to recognize, while foods like pizza and french fries tended not to work as well, and we aren’t sure why.
 			</p>
+      <figure class='float'>
+        <div class='multi' style='padding-bottom: 66.6910688141%'><ul><li style='flex-grow: 1.0'><img src='images/lights.jpg' /></li></ul></div>
+        <figcaption>As a user swipes through cards in the web interface, it uses AJAX to communicate with a local web server on the Raspberry Pi to turn on and off LED's attached to the PI's GPIO pins.</figcaption>
+      </figure>
 			<p>
 				Each spice was lit up by 3 LED’s (Amber 591 nm LED Indication - Discrete 2.1V Radial) in parallel powered by a GPIO pin on the Raspberry Pi. In total, we used 15 GPIO pins - one for each spice. Initially, we investigated multiplexing as an option to reduce the number of pins needed to light up every spice. Multiplexing allows you to control 8 LED’s with only 3 pins connected to a shift register, which is optimal when controlling hundreds of LED’s. Eventually, we settled on using the simpler method of connecting a single LED to a GPIO pin and using 15 pins because it was easier to control via the user interface. A Python program running on the Pi flipped lights on and off aas users swiped through available recipes.
 			</p>
@@ -178,7 +183,7 @@
 			<figure class='scrollable'>
 <div class='multi' style='padding-bottom: 17.2573265301%'><ul><li style='flex-grow: 0.292376193278'><img src='images/mock1.png' class='bordered' /></li><li style='flex-grow: 0.353551072743'><img src='images/mock2.png' class='bordered' /></li><li style='flex-grow: 0.354072733979'><img src='images/mock3.png' class='bordered' /></li></ul></div>
 				<figcaption>
-					Figure 2: Three mockups, including an "input-directed" one (top), a "scrollable" one (left), and a "cards" one (right)
+					Three mockups, including an "input-directed" one (top), a "scrollable" one (left), and a "cards" one (right)
 				</figcaption>
 			</figure>
 			<p>
@@ -187,7 +192,7 @@
 			<figure class='scrollable'>
         <div class='multi' style='padding-bottom: 25.3056234719%'><ul><li style='flex-grow: 0.5'><img src='images/smallercards1.png' class='bordered' /></li><li style='flex-grow: 0.5'><img src='images/smallercards2.png' class='bordered' /></li></ul></div>
 				<figcaption>
-					Figure 3: Experimenting with smaller cards
+					Experimenting with smaller cards
 				</figcaption>
 			</figure>
 			<p>
@@ -196,7 +201,7 @@
 			<figure class='scrollable'>
         <div class='multi' style='padding-bottom: 30.1535974131%'><ul><li style='flex-grow: 0.497978981407'><img src='images/highres1.png' class='bordered' /></li><li style='flex-grow: 0.502021018593'><img src='images/highres2.png' class='bordered' /></li></ul></div>
 				<figcaption>
-					Figure 4: Exploring design elements in the high resolutions mockups
+					Exploring design elements in the high resolutions mockups
 				</figcaption>
 			</figure>
 			<p>
@@ -210,14 +215,14 @@
 			</p>
 			<figure class='scrollable'>
         <div class='multi' style='padding-bottom: 29.9953246429%'><ul><li style='flex-grow: 0.497333924938'><img src='images/finalmock.png' /></li><li style='flex-grow: 0.502666075062'><img src='images/finalfrontend.png' /></li></ul></div>
-				<figcaption>[Left] Figure 5: The main page of the final mockup <br/>[Right] Figure 6: The final frontend product shown on the website, here displaying recipes for chicken</figcaption>
+				<figcaption>[Left] The main page of the final mockup <br/>[Right] The final frontend product shown on the website, here displaying recipes for chicken</figcaption>
 			</figure>
 			<p>
 				The final frontend product was coded in HTML, CSS, and jQuery, and exists as a web page on our Google App Engine website (though it is a web page, it is only meant to be accessed from the built device). A carousel slider was used to control the cards, which can be swiped between on the touchscreen of the Pi. When a card is swiped to, it takes center stage on the screen, giving it focus. The surrounding recipes are at a lower opacity to add to that focus. The icon above each recipe is based on which spice is the biggest player in it (i.e. which spice has the most shakes)--each spice is associated with a certain icon, though some share the same one (for instance, chipotle, chili, and cayenne each shared the spicy pepper icon).
 			</p>
 			<figure class='float'>
         <div class='multi' style='padding-bottom: 59.2948717949%'><ul><li style='flex-grow: 1.0'><img src='images/idlestate.png' /></li></ul></div>
-				<figcaption>Figure 7: The idle state of the device when no food has been placed underneath. It returns to this state before a plate has been placed and after it has been removed</figcaption>
+				<figcaption>The idle state of the device when no food has been placed underneath. It returns to this state before a plate has been placed and after it has been removed</figcaption>
 			</figure>
 			<p>
 				We needed an idle state for when no plate was present. We wanted it to fit with the style and provide some information for anyone who hasn't used the device before, opting for a short directive. A jQuery function controls the background, which is composed of spice icons that fade in and out in a random pattern. This gives the screen a little bit of life, encouraging someone walking by to give it attention, without distracting from the main text.
@@ -231,7 +236,7 @@
 			<figure>
 <div class='multi' style='padding-bottom: 66.8049792531%'><ul><li style='flex-grow: 1.0'><img src='images/finalform.png' /></li></ul></div>
 				<figcaption>
-					Figure 12: The final form with broccoli being identified and spices lighting up according to the currently-shown recipe
+					The final form with broccoli being identified and spices lighting up according to the currently-shown recipe
 				</figcaption>
 			</figure>
 			<p>
