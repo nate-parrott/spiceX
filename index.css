@@ -5,6 +5,7 @@ body {
   background-color: white;
   color: #222;
   margin: 0;
+  overflow-x: hidden;
 }
 
 section:not(#title) {
@@ -38,10 +39,6 @@ section:not(#title) {
 #title .text {
   background-image: url(/images/overlay.svg);
   color: transparent;
-}
-
-#rendering {
-  z-index: 10;
 }
 
 h1, h2, h3, h4, h5 {
@@ -107,4 +104,8 @@ figcaption {
   margin: auto;
   margin-top: 1em;
   width: 70%;
+}
+
+a {
+  color: inherit;
 }
