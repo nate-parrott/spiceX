@@ -109,3 +109,7 @@ figcaption {
 a {
   color: inherit;
 }
+
+img.bordered {
+  box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.1);
+}
