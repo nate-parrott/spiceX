@@ -287,7 +287,7 @@ var recipeArrowScrollStyler = function() {
 
 document.addEventListener('scroll', recipeArrowScrollStyler, true);
 
-let isEmbedded = location.search.indexOf('embedded') == -1;
+let isEmbedded = location.search.indexOf('embedded') != -1;
 
 if (location.search.indexOf('info') == -1 && !isEmbedded) {
   $(document.body).addClass('hide-cursor');
