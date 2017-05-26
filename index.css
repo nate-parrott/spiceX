@@ -146,11 +146,11 @@ img.bordered {
   margin-right: auto;
   width: 90%;
   font-size: x-large;
+  opacity: 0.5;
 }
 
 #hook p:first-child {
   font-size: large;
-  opacity: 0.7;
 }
 
 .responsive-iframe-container {
